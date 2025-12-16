@@ -7,7 +7,15 @@ export const routes: Routes = [
 		children: [
 			{
 				path: 'home',
-				loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+				loadComponent: () => import('./features/home/home.page').then((m) => m.HomePage),
+			},
+			{
+				path: 'scents',
+				loadComponent: () => import('./features/scents/scents.page').then( m => m.ScentsPage)
+			},
+			{
+				path: 'personalised',
+				loadComponent: () => import('./features/personalised/personalised.page').then( m => m.PersonalisedPage)
 			},
 			{
 				path: '',
@@ -16,9 +24,4 @@ export const routes: Routes = [
 			}
 		]
 	},
-  {
-    path: '',
-    redirectTo: 'tabs/home',
-    pathMatch: 'full',
-  },
 ];
