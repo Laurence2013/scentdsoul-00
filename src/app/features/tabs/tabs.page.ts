@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { homeOutline, diamondOutline, personOutline} from 'ionicons/icons';
+import { homeOutline, diamondOutline, personOutline, bagHandleOutline, personCircleOutline} from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs',
@@ -16,11 +16,16 @@ export class TabsPage implements OnInit {
 	private router = inject(Router);
 
   public constructor(){
-		addIcons({homeOutline, diamondOutline, personOutline})
+		addIcons({homeOutline, diamondOutline, personOutline, bagHandleOutline, personCircleOutline})
 	}
   public ngOnInit(){}
-	public goToScents(){
-		this.router.navigate(['/scents']);
+	public goToPersonalised(){
+		console.log('Personalised');
 	}
-	public goToPersonalised(){}
+	public goToOrders(){
+		console.log('Orders');
+	}
+	public goToAccount(){
+		console.log('Account');
+	}
 }

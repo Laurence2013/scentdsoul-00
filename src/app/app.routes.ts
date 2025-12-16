@@ -10,12 +10,16 @@ export const routes: Routes = [
 				loadComponent: () => import('./features/home/home.page').then((m) => m.HomePage),
 			},
 			{
-				path: 'scents',
-				loadComponent: () => import('./features/scents/scents.page').then( m => m.ScentsPage)
-			},
-			{
 				path: 'personalised',
 				loadComponent: () => import('./features/personalised/personalised.page').then( m => m.PersonalisedPage)
+			},
+			{
+				path: 'orders',
+				loadComponent: () => import('./features/orders/orders.page').then( m => m.OrdersPage)
+			},
+			{
+				path: 'account',
+				loadComponent: () => import('./features/account/account.page').then( m => m.AccountPage)
 			},
 			{
 				path: '',
@@ -24,4 +28,8 @@ export const routes: Routes = [
 			}
 		]
 	},
+  {
+    path: 'scents',
+    loadComponent: () => import('./scents/scents.page').then( m => m.ScentsPage)
+  },
 ];
