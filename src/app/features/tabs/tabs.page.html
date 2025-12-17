@@ -1,15 +1,15 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-		<ion-tab-button tab="home" href="/tabs/home">
+		<ion-tab-button tab="home" routerLink="/tabs/home">
       <ion-icon name="home-outline"></ion-icon> <ion-label>Home</ion-label>
     </ion-tab-button>
-    <ion-tab-button (click)="goToPersonalised()" tab="personalised" href="/tabs/personalised">
+    <ion-tab-button (click)="goToPersonalised()" tab="personalised" routerLink="/tabs/personalised">
       <ion-icon name="person-outline"></ion-icon> <ion-label>Personalised</ion-label>
     </ion-tab-button>
-    <ion-tab-button (click)="goToOrders()" tab="orders" href="/tabs/orders">
+    <ion-tab-button (click)="goToOrders()" tab="orders" routerLink="/tabs/orders">
       <ion-icon name="bag-handle-outline"></ion-icon> <ion-label>Orders</ion-label>
     </ion-tab-button>
-    <ion-tab-button (click)="goToAccount()" tab="account" href="/tabs/account">
+    <ion-tab-button (click)="goToAccount()" tab="account" routerLink="/tabs/account">
       <ion-icon name="person-circle-outline"></ion-icon> <ion-label>Account</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
