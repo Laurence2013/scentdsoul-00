@@ -1,27 +1,31 @@
-<ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu Content</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <ion-list>
-      <ion-menu-toggle>
-        <ion-item routerLink="/scents">Scents</ion-item>
-      </ion-menu-toggle>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>scentdsoul</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+	<ion-menu contentId="main-content">
+		<ion-header>
+			<ion-toolbar>
+				<ion-title>Menu Content</ion-title>
+			</ion-toolbar>
+		</ion-header>
+		<ion-content class="ion-padding">
+			<ion-list>
+				<ion-menu-toggle>
+					<!--<ion-item routerLink="/scents">Scents</ion-item>-->
+					<ion-item href="/tabs/scents">Scents</ion-item>
+				</ion-menu-toggle>
+			</ion-list>
+		</ion-content>
+	</ion-menu>
+
+	<div class="ion-page" id="main-content">
+		<ion-header>
+			<ion-toolbar>
+				<ion-buttons slot="start">
+					<ion-menu-button></ion-menu-button>
+				</ion-buttons>
+				<ion-title>scentdsoul</ion-title>
+			</ion-toolbar>
+		</ion-header>
+
+		<ion-router-outlet></ion-router-outlet>
+	</div>
 </ion-app>

@@ -22,14 +22,19 @@ export const routes: Routes = [
 				loadComponent: () => import('./features/account/account.page').then( m => m.AccountPage)
 			},
 			{
+				path: 'scents',
+				loadComponent: () => import('./features/scents/scents.page').then( m => m.ScentsPage)
+			},
+			{
 				path: '',
 				redirectTo: 'home',
 				pathMatch: 'full',
 			}
 		]
 	},
-  {
-    path: 'scents',
-    loadComponent: () => import('./scents/scents.page').then( m => m.ScentsPage)
-  },
+	{
+		path: '',
+		redirectTo: 'tabs/home',
+		pathMatch: 'full',
+	},
 ];
