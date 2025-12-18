@@ -69,4 +69,40 @@ export const routes: Routes = [
 		redirectTo: 'tabs/home',
 		pathMatch: 'full',
 	},
+  {
+    path: 'cardboard',
+    loadComponent: () => import('./admin/cardboard/cardboard.page').then( m => m.CardboardPage)
+  },
+  {
+    path: 'vent',
+    loadComponent: () => import('./admin/vent/vent.page').then( m => m.VentPage)
+  },
+  {
+    path: 'spray',
+    loadComponent: () => import('./admin/spray/spray.page').then( m => m.SprayPage)
+  },
+  {
+    path: 'plug-in',
+    loadComponent: () => import('./admin/plug-in/plug-in.page').then( m => m.PlugInPage)
+  },
+  {
+    path: 'bag',
+    loadComponent: () => import('./admin/bag/bag.page').then( m => m.BagPage)
+  },
+  {
+    path: 'oil-diffuser',
+    loadComponent: () => import('./admin/oil-diffuser/oil-diffuser.page').then( m => m.OilDiffuserPage)
+  },
+  {
+    path: 'bead-sachets',
+    loadComponent: () => import('./admin/bead-sachets/bead-sachets.page').then( m => m.BeadSachetsPage)
+  },
+  {
+    path: 'electronic-ioniser',
+    loadComponent: () => import('./admin/electronic-ioniser/electronic-ioniser.page').then( m => m.ElectronicIoniserPage)
+  },
+  {
+    path: 'under-seat',
+    loadComponent: () => import('./admin/under-seat/under-seat.page').then( m => m.UnderSeatPage)
+  },
 ];
