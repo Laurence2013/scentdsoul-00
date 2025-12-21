@@ -1,10 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
-import { Observable } from 'rxjs';
+import { ConnectFirestore } from '../../services/firestore/connect-firestore';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +14,10 @@ import { Observable } from 'rxjs';
 })
 export class HomePage implements OnInit {
 
-	private firestore = inject(Firestore);
+	private connectFirestore = inject(ConnectFirestore);
 
   public constructor(){}
-  public ngOnInit(){}
+  public ngOnInit(){
+		this.connectFirestore.getCollectionData('cardboard').subscribe(data => console.log(data));
+	}
 }
