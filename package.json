@@ -28,7 +28,7 @@
     "@capacitor/keyboard": "8.0.0",
     "@capacitor/status-bar": "8.0.0",
     "@ionic/angular": "^8.0.0",
-    "firebase": "12.7.0",
+    "firebase": "11.10.0",
     "immutable": "^5.1.4",
     "ionicons": "^8.0.13",
     "postman-cli": "^1.27.0",
@@ -64,5 +64,8 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.9.0"
   },
+	"overrides": {
+		"firebase": "11.10.0"
+	},
   "description": "E-commerce store for scentdsoul"
 }

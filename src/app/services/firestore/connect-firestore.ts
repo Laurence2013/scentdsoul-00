@@ -13,8 +13,8 @@ export class ConnectFirestore {
 	private firestore = inject(Firestore);
 
 	public constructor(){}
-	public getCollectionData(collectionName: string): Observable<IntConnectFirestore[]>{
+	public getCollectionData(collectionName: string): Observable<any[]>{
 		const colRef = collection(this.firestore, collectionName) as CollectionReference;
-		return collectionData<IntConnectFirestore>(colRef, { idField: 'id' }).pipe(tap(_ => console.log(`Data from ${collectionName}`)));
+		return collectionData(colRef, { idField: 'id' }).pipe(tap(_ => console.log(`Data from ${collectionName}`))) as Observable<any[]>;
 	}
 }
