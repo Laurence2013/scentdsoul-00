@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
 import { ConnectFirestore } from '../../services/firestore/connect-firestore';
+import { IntConnectFirestore } from '../../interface/firestore/connect-firestore';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +16,17 @@ import { ConnectFirestore } from '../../services/firestore/connect-firestore';
 export class HomePage implements OnInit {
 
 	private connectFirestore = inject(ConnectFirestore);
+	
+	public data: IntConnectFirestore[] = [];
 
   public constructor(){}
   public ngOnInit(){
-		this.connectFirestore.getCollectionData('cardboard').subscribe(data => console.log(data));
+		this.connectFirestore.getCollectionData('cardboard').subscribe({
+			next: res => {
+				this.data = res;
+				console.log('Succcess', res);
+			},
+			error: err => console.error('Firestore Error: ', err)
+		});
 	}
 }
