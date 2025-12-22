@@ -8,7 +8,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   templateUrl: './oil-diffuser.page.html',
   styleUrls: ['./oil-diffuser.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+	host: { 'collision-id': 'app-oil-diffuser' }
 })
 export class OilDiffuserPage implements OnInit {
 

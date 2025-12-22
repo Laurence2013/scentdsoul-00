@@ -8,7 +8,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   templateUrl: './spray.page.html',
   styleUrls: ['./spray.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+	host: { 'collision-id': 'app-admin-spray' }
 })
 export class SprayPage implements OnInit {
 

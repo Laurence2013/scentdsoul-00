@@ -8,7 +8,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   templateUrl: './electronic-ioniser.page.html',
   styleUrls: ['./electronic-ioniser.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+	host: { 'collision-id': 'app-admin-electronic-ioniser' }
 })
 export class ElectronicIoniserPage implements OnInit {
 

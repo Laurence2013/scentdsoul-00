@@ -8,7 +8,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   templateUrl: './bead-sachets.page.html',
   styleUrls: ['./bead-sachets.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+	host: { 'collision-id': 'app-admin-bead-sachets' }
 })
 export class BeadSachetsPage implements OnInit {
 
