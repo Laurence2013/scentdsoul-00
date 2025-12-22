@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
 
 import { ConnectFirestore } from '../../services/firestore/connect-firestore';
 import { IntConnectFirestore } from '../../interface/firestore/connect-firestore';
@@ -11,7 +11,7 @@ import { IntConnectFirestore } from '../../interface/firestore/connect-firestore
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, IonList, IonItem, IonLabel]
 })
 export class HomePage implements OnInit {
 
