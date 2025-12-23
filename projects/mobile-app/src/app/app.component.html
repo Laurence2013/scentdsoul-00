@@ -1,0 +1,38 @@
+<ion-app>
+
+	<ion-menu contentId="main-content">
+		<ion-header>
+			<ion-toolbar>
+				<ion-title>Scent Categories</ion-title>
+			</ion-toolbar>
+		</ion-header>
+		<ion-content class="ion-padding">
+			<ion-list>
+				<ion-menu-toggle>
+					<ion-item routerLink="/tabs/cardboard">Cardboard/Hanging</ion-item>
+					<ion-item routerLink="/tabs/vent">Vent Clip/Stick</ion-item>
+					<ion-item routerLink="/tabs/spray">Spray</ion-item>
+					<ion-item routerLink="/tabs/plug-in">Plug-in/Electric Diffuser</ion-item>
+					<ion-item routerLink="/tabs/bag">Bag/Pouch</ion-item>
+					<ion-item routerLink="/tabs/oil-diffuser">Oil Diffuser</ion-item>
+					<ion-item routerLink="/tabs/bead-sachets">Bead Sachets</ion-item>
+					<ion-item routerLink="/tabs/under-seat">Under-seat Blocks</ion-item>
+					<ion-item routerLink="/tabs/electronic-ioniser">Electronic Ioniser</ion-item>
+				</ion-menu-toggle>
+			</ion-list>
+		</ion-content>
+	</ion-menu>
+
+	<div class="ion-page" id="main-content">
+		<ion-header>
+			<ion-toolbar>
+				<ion-buttons slot="start">
+					<ion-menu-button></ion-menu-button>
+				</ion-buttons>
+				<ion-title>scentdsoul</ion-title>
+			</ion-toolbar>
+		</ion-header>
+
+		<ion-router-outlet></ion-router-outlet>
+	</div>
+</ion-app>

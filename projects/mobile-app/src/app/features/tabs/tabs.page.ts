@@ -1,0 +1,31 @@
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { homeOutline, diamondOutline, personOutline, bagHandleOutline, personCircleOutline} from 'ionicons/icons';
+
+@Component({
+  selector: 'app-tabs',
+  templateUrl: './tabs.page.html',
+  styleUrls: ['./tabs.page.scss'],
+  standalone: true,
+  imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, CommonModule, RouterLink]
+})
+export class TabsPage implements OnInit {
+	private router = inject(Router);
+
+  public constructor(){
+		addIcons({homeOutline, diamondOutline, personOutline, bagHandleOutline, personCircleOutline})
+	}
+  public ngOnInit(){}
+	public goToPersonalised(){
+		console.log('Personalised');
+	}
+	public goToOrders(){
+		console.log('Orders');
+	}
+	public goToAccount(){
+		console.log('Account');
+	}
+}
