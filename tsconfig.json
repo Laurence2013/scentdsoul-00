@@ -17,14 +17,15 @@
     "moduleResolution": "bundler",
     "paths": {
       "shared-logic": [
-				"libs/shaed-logic/src/public-api.ts"
+				"libs/shared-logic/src/public-api.ts"
       ]
     },
     "importHelpers": true,
     "target": "es2022",
-    "module": "es2020",
+    "module": "esnext",
     "skipLibCheck": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+		"lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -33,23 +34,13 @@
     "strictTemplates": true
   },
   "references": [
-    {
-      "path": "./projects/admin-panel/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/admin-panel/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/shared-logic/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/shared-logic/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/shared-logic/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/shared-logic/tsconfig.spec.json"
-    }
+		{ "path": "./projects/mobile-app/tsconfig.app.json" },
+		{ "path": "./projects/mobile-app/tsconfig.spec.json" },
+    { "path": "./libs/admin-panel/tsconfig.app.json" },
+    { "path": "./libs/admin-panel/tsconfig.spec.json" },
+    { "path": "./libs/shared-logic/tsconfig.lib.json" },
+    { "path": "./libs/shared-logic/tsconfig.spec.json" },
+    { "path": "./libs/shared-logic/tsconfig.lib.json" },
+    { "path": "./libs/shared-logic/tsconfig.spec.json" }
   ]
 }

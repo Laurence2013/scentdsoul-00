@@ -1,7 +1,7 @@
 {
-  "name": "scentdsoul-00",
+  "name": "app",
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular-standalone"
+  "type": "angular"
 }

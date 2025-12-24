@@ -11,33 +11,31 @@
           "standalone": true
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/mobile-app",
+      "sourceRoot": "projects/mobile-app/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
             "outputPath": {
-              "base": "www",
+              "base": "dist/app",
               "browser": ""
             },
-            "index": "src/index.html",
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
-            "tsConfig": "tsconfig.app.json",
+            "index": "projects/mobile-app/src/index.html",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/mobile-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/assets",
+                "input": "projects/mobile-app/src/assets",
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["projects/mobile-app/src/global.scss", "projects/mobile-app/src/theme/variables.scss"],
             "scripts": [],
-            "browser": "src/main.ts"
+            "browser": "projects/mobile-app/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -214,18 +212,18 @@
     },
     "shared-logic": {
       "projectType": "library",
-      "root": "projects/shared-logic",
-      "sourceRoot": "projects/shared-logic/src",
+      "root": "libs/shared-logic",
+      "sourceRoot": "libs/shared-logic/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
           "configurations": {
             "production": {
-              "tsConfig": "projects/shared-logic/tsconfig.lib.prod.json"
+              "tsConfig": "libs/shared-logic/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/shared-logic/tsconfig.lib.json"
+              "tsConfig": "libs/shared-logic/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -233,7 +231,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "tsConfig": "projects/shared-logic/tsconfig.spec.json",
+            "tsConfig": "libs/shared-logic/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
