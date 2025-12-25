@@ -1,7 +1,8 @@
 {
-  "name": "app",
+  "name": "mobile-app",
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular"
+  "type": "angular",
+	"defaultProject": "mobile-app"
 }
