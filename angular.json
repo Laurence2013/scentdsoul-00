@@ -145,7 +145,8 @@
               }
             ],
             "styles": [
-              "projects/admin-panel/src/styles.css"
+              "projects/admin-panel/src/styles.css",
+							"node_modules/primeicons/primeicons.css"
             ]
           },
           "configurations": {

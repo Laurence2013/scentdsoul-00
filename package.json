@@ -14,6 +14,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^21.0.6",
+    "@angular/cdk": "^21.0.5",
     "@angular/common": "^21.0.6",
     "@angular/compiler": "^21.0.6",
     "@angular/core": "^21.0.6",
@@ -28,10 +29,14 @@
     "@capacitor/keyboard": "8.0.0",
     "@capacitor/status-bar": "8.0.0",
     "@ionic/angular": "^8.7.15",
+    "@primeuix/themes": "^2.0.2",
     "firebase": "11.10.0",
     "immutable": "^5.1.4",
     "ionicons": "^8.0.13",
     "postman-cli": "^1.28.0",
+    "primeflex": "^4.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.16.0"
