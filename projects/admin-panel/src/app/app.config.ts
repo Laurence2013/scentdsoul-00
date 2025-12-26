@@ -28,6 +28,13 @@ export const appConfig: ApplicationConfig = {
 		providePrimeNG({ 
 			theme: { 
 				preset: Aura,
+				options: {
+					darkModeSelector: '.my-app-dark',
+					cssLayer: {
+						name: 'primeng',
+						order: 'tailwind-base, ionic, primeng, tailwind-utilities'
+					}
+				}
 			},
 			ripple: true
 		})

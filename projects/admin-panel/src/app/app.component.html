@@ -1,7 +1,23 @@
-<p>
-  app works!
-</p>
-<hr>
-<p-button label='Check'></p-button>
-<hr>
-<div pRipple class='p-4 shadow-1 border-round cursor-pointer'>Click me to see the ripple!</div>
+<div class='layout-wrapper'>
+	<p-toolbar class='layout-topbar'>
+		<ng-template pTemplate='start'>
+			<p-button icon='pi pi-bars' (click)="sidebarVisible = true" [text]='true' severity='secondary'></p-button>
+			<span class='ml2 font-bold text-xl text-primary'>scentdsoul</span>
+		</ng-template>
+		<ng-template pTemplate='end'>
+			<p-button icon='pi pi-user' [rounded]='true' [text]='true'></p-button>
+		</ng-template>
+	</p-toolbar>
+
+	<p-drawer [(visible)]='sidebarVisible'>
+		<h3>Menu</h3>
+		<ul class='list-none p-0'>
+			<li class='p-3 hover:surface-hover border-round cursor-pointer'>Dashboard</li>
+			<li class='p-3 hover:surface-hover border-round cursor-pointer'>Settings</li>
+		</ul>
+	</p-drawer>
+
+	<main class='layout-content p-4'>
+		<p>Hello</p>
+	</main>
+</div>
