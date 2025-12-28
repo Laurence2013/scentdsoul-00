@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { ToolbarModule } from 'primeng/toolbar';
+import { Card } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { DrawerModule } from 'primeng/drawer';
-import { RippleModule } from 'primeng/ripple';
+import { Avatar } from 'primeng/avatar';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 	standalone: true,
-	imports: [CommonModule, ToolbarModule, ButtonModule, DrawerModule, RippleModule]
+	imports: [CommonModule, Avatar, Card, ButtonModule]
 })
 export class AppComponent implements OnInit {
 

@@ -1,16 +1,7 @@
-.layout-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+:root {
+  --primary: var(--p-primary-500);
 }
 
-.layout-topbar {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-
-.layout-content {
-    flex: 1 1 auto;
-    overflow-y: auto;
+.text-primary {
+  color: var(--primary);
 }
