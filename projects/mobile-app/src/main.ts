@@ -1,9 +1,9 @@
-import { provideZoneChangeDetection, isDevMode } from "@angular/core";
+import { provideZoneChangeDetection, isDevMode, inject } from "@angular/core";
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { FirebaseApp, provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
 
 import { environment } from './environments/environment';
@@ -21,7 +21,8 @@ bootstrapApplication(AppComponent, {
 		//Add Firebase Providers here
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		provideFirestore(() => {
-			const firestore = getFirestore();
+			const app = inject(FirebaseApp);
+			const firestore = getFirestore(app);
       // Only use emulator in development mode
       if (isDevMode()) {
         connectFirestoreEmulator(firestore, 'localhost', 8080);
