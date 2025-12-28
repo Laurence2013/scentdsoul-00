@@ -2,5 +2,8 @@
 
 @import 'tailwindcss';
 
-@layer tailwind-base, primeng, tailwind-utilities;
+@plugin "tailwindcss-primeui";
 
+@layer theme, base, primeng, utilities;
+
+@layer primeng {}
