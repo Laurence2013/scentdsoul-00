@@ -21,6 +21,12 @@ export class HomePage implements OnInit {
 
   public constructor(){}
   public ngOnInit(){
-		this.connectFirestore.getCollectionData('cardboard').subscribe(console.log);
+		this.connectFirestore.getCollectionData('cardboard').subscribe({
+			next: res => {
+				this.data = res;
+				console.log('Succcess', res);
+			},
+			error: err => console.error('Firestore Error: ', err)
+		});
 	}
 }
