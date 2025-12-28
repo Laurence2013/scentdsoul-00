@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { Card } from 'primeng/card';
@@ -13,6 +13,9 @@ import { environment } from '../environments/environment';
 
 import { CarAirFreshenersModel } from '../../models/car-air-fresheners.model';
 
+import { Observable, of, EMPTY } from 'rxjs';
+import { tap, delay } from 'rxjs/operators';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,18 +27,20 @@ export class AppComponent implements OnInit {
 
 	private dataService = inject(DataService);
 	private carAirFresheners$ = this.dataService.getCarAirFresheners();
+	private router = inject(Router);
 
 	public sidebarVisible = false;
-	public caf00: CarAirFreshenersModel[] = [];
+	public caf00$: Observable<CarAirFreshenersModel[]> = EMPTY;
 
   public constructor(){}
   public ngOnInit(){
 		console.log('Attempting to get project: ', environment.firebase.projectId);
 	}
+	public dashboard(){
+		this.caf00$ = EMPTY;
+		this.router.navigate(['/']);
+	}
 	public car_air_fresheners(){
-		this.carAirFresheners$.subscribe({
-			next: res => this.caf00 = res,
-			error: err => console.log(err)
-		});
+		this.caf00$ = this.carAirFresheners$.pipe(delay(2000));
 	}
 }

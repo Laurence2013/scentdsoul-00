@@ -8,30 +8,32 @@
 			<p-button label="Car Air Fresheners" styleClass="w-full md:w-auto shadow-md" severity="success" (click)="car_air_fresheners()"/>
     </nav>
   </aside>
-
   <div class="flex flex-1 flex-col overflow-hidden">
-    
     <header class="h-16 flex items-center justify-between px-6 border-b border-surface-200 bg-surface-100 dark:bg-surface-900">
-      <div>Dashboard</div>
+			<a routerLink="/" (click)="dashboard()" class="cursor-pointer hover:text-primary-600 transition-colors font-medium">Dashboard</a>
       <p-avatar icon="pi pi-user" shape="circle" styleClass="bg-primary-100 text-primary-600" />
     </header>
-
     <main class="flex-1 overflow-y-auto p-6">
       <div class="grid grid-cols-1 gap-4">
          <p-card>
-					 @for(item of caf00; track item.id){
-					 <p-fluid>
-						 <div class="flex flex-col gap-2">
-							 <label>
-								 <h2>Type: {{ item.name }}</h2>
-								 <h3>Other type: {{ item.another_name }}</h3>
-							 </label>
-						 </div>
-					 </p-fluid>
-					 }
+					 @if(caf00$ | async; as data){
+						 @if(data.length > 0){
+							 @for(item of data; track item.id){
+								 <p-fluid>
+									 <div class="flex flex-col gap-2">
+										 <label>
+											 <h2>Type: {{ item.name }}</h2>
+											 <h3>Other type: {{ item.another_name }}</h3>
+										 </label>
+									 </div>
+								 </p-fluid>
+							}} @else {
+						 		<p>Nothing</p>
+							}} @else {
+						<p>Dashboard empty</p>
+					}
 				 </p-card>
       </div>
     </main>
-
   </div>
 </div>
