@@ -1,8 +1,8 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, inject } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
+import { FirebaseApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore, connectFirestoreEmulator, initializeFirestore } from '@angular/fire/firestore';
 
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
@@ -19,9 +19,12 @@ export const appConfig: ApplicationConfig = {
 		provideAnimationsAsync(),
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		provideFirestore(() => {
-			const firestore = getFirestore();
+			const app = inject(FirebaseApp);
+			const firestore = getFirestore(app);
+			//const firestore = initializeFirestore(app, {experimentalForceLongPolling: true});
 			if(environment.useEmulators){
-				connectFirestoreEmulator(firestore, 'localhost', 8080)
+				console.log('Connecting to Firestore Emulator at 127.0.0.1:8080');
+				connectFirestoreEmulator(firestore, '127.0.0.1', 8080)
 			}
 			return firestore;
 		}),

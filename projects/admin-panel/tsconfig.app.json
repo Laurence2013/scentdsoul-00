@@ -10,6 +10,11 @@
     "src/**/*.ts",
     "src/**/*.d.ts"
   ],
+	"files": [
+		"src/main.ts",
+    "src/polyfills.ts",
+    "src/env.d.ts"
+	],
   "exclude": [
     "src/**/*.spec.ts"
   ]
