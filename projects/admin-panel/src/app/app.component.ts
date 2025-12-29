@@ -8,12 +8,15 @@ import { FluidModule } from 'primeng/fluid';
 import { Avatar } from 'primeng/avatar';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { DataService } from './service/firestore/data-service';
 
 import { environment } from '../environments/environment';
 
 import { CarAirFreshenersModel } from '../../models/car-air-fresheners.model';
+
+import { AddFreshenerFormComponent } from './components/add-freshener-form/add-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
@@ -23,6 +26,7 @@ import { tap, delay } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 	standalone: true,
+	providers: [DialogService],
 	imports: [CommonModule, Avatar, Card, ButtonModule, FluidModule, ProgressSpinner, TooltipModule]
 })
 export class AppComponent implements OnInit {
@@ -30,6 +34,8 @@ export class AppComponent implements OnInit {
 	private dataService = inject(DataService);
 	private carAirFresheners$ = this.dataService.getCarAirFresheners();
 	private router = inject(Router);
+	private dialogService = inject(DialogService);
+	private ref: DynamicDialogRef<AddFreshenerFormComponent> | null | undefined;
 
 	public sidebarVisible = false;
 	public caf00$: Observable<CarAirFreshenersModel[]> = EMPTY;
@@ -48,7 +54,15 @@ export class AppComponent implements OnInit {
 		this.caf00$ = this.carAirFresheners$.pipe(delay(2000));
 	}
 	public addNewItem(){
-		console.log('Add new item');
+		this.ref = this.dialogService.open(AddFreshenerFormComponent, {
+			header: 'Add New Car Air Freshener',
+			width: '400px',
+			modal: true,
+			breakpoints: {
+				'960px': '75vw',
+				'640px': '90vw'
+			}
+		});
 	}
 	public editItem(item: any){
 		console.log(item);
