@@ -1,6 +1,17 @@
-<div class="flex flex-col gap-4">
-	<section>
-		<b>Car Air Freshener name: </b><input pInputText [(ngModel)]="item.name" placeholder="Name">
+<div class="flex flex-col gap-6 p-1">
+	<section class="flex flex-col gap-4">
+		<div class="flex flex-col gap-2">
+			<label class="font-bold text-sm">Car Air Freshener name: </label>
+			<input pInputText [(ngModel)]="item.name" placeholder="e.g. Lavender" class="w-full">
+		</div>
+		<div class="flex flex-col gap-2">
+			<label class="font-bold text-sm">Other name: </label>
+			<input pInputText [(ngModel)]="item.another_name" placeholder="e.g. Lavenders" class="w-full">
+		</div>
+		<div class="flex flex-col gap-2">
+			<label class="font-bold text-sm">Another name: </label>
+			<input pInputText [(ngModel)]="item.other_name" placeholder="e.g. Another name for Lavender" class="w-full">
+		</div>
 	</section>
 	<div class="flex justify-end gap-2">
 		<p-button label="Cancel" (click)="close()" severity="secondary" [text]="true"></p-button>

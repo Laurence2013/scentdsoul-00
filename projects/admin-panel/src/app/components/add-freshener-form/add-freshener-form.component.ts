@@ -16,7 +16,7 @@ export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
 	
-	public item = { name: '' };
+	public item = { name: '', another_name: '', other_name: '' };
 
   public ngOnInit(){}
 	public save(){
