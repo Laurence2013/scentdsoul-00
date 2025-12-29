@@ -65,11 +65,13 @@ export class AppComponent implements OnInit, OnDestroy {
 				'640px': '90vw'
 			}
 		});
-		this.ref?.onClose.pipe(takeUntilDestroyed(this.destrofRef)).subscribe((newItem: AddFreshenerFormComponent) => {
+		const newCaf00$ = this.ref?.onClose.pipe(map((newCAF: CarAirFreshenersModel) => (({...newCAF}))));
+
+		/*this.ref?.onClose.pipe(takeUntilDestroyed(this.destrofRef)).subscribe((newItem: AddFreshenerFormComponent) => {
 			if(newItem){
 				console.log('Received from dialog: ', newItem)
 			}
-		});
+		});*/
 	}
 	public editItem(item: any){
 		console.log(item);
