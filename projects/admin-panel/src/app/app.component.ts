@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { FluidModule } from 'primeng/fluid';
 import { Avatar } from 'primeng/avatar';
 import { ProgressSpinner } from 'primeng/progressspinner';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { DataService } from './service/firestore/data-service';
 
@@ -22,7 +23,7 @@ import { tap, delay } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 	standalone: true,
-	imports: [CommonModule, Avatar, Card, ButtonModule, FluidModule, ProgressSpinner]
+	imports: [CommonModule, Avatar, Card, ButtonModule, FluidModule, ProgressSpinner, TooltipModule]
 })
 export class AppComponent implements OnInit {
 
@@ -48,5 +49,11 @@ export class AppComponent implements OnInit {
 	}
 	public addNewItem(){
 		console.log('Add new item');
+	}
+	public editItem(item: any){
+		console.log(item);
+	}
+	public deleteItem(id: number){
+		console.log('Deleting item with ID:', id);
 	}
 }

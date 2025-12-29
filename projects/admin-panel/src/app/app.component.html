@@ -19,18 +19,41 @@
 					 @if(caf00$ | async; as data){
 						 <div class="flex items-center justify-between mb-4">
 							 <h1 id="title-00" class="text-xl font-bold">Car Air Fresheners</h1>
-							 <p-button icon="pi pi-plus" [rounded]="true" [text]="true" severity="secondary" (click)="addNewItem()"></p-button>
+							 <p-button icon="pi pi-plus" [rounded]="true" [text]="true" severity="secondary" pTooltip="Add Item" tooltipPosition="top" (click)="addNewItem()"></p-button>
 						 </div>
 					 	 @if(data.length > 0){
 					 		 @for(item of data; track item.id){
 					 			 <p-fluid>
-					 				 <div class="flex flex-col gap-2">
-					 					 <label>
-											 <h2 class="capitalize"><b>Type:</b> {{ item.name }}</h2>
-											 <h3 class="capitalize"><b>Other type:</b> {{ item.another_name || 'Nothing'}}</h3>
-					 					 </label>
-										 <div class="mt-2 border-t border-dashed border-surface-300"></div>
-					 				 </div>
+									 <div class="flex items-start justify-between py-3">
+										 <div class="flex flex-col gap-1">
+											 <label>
+												 <h2 class="capitalize"><b>Type:</b> {{ item.name }}</h2>
+												 <h3 class="capitalize"><b>Other type:</b> {{ item.another_name || '...'}}</h3>
+												 <h3 class="capitalize"><b>Other term:</b> {{ item.other_name || '...'}}</h3>
+											 </label>
+										 </div>
+										 <div class="flex gap-2">
+											 <p-button 
+													icon="pi pi-pencil" 
+												 [rounded]="true" 
+												 [text]="true" 
+												 severity="secondary" 
+												 pTooltip="Add New Freshener"
+												 tooltipPosition="top"
+												 (click)="editItem(item)" 
+												 aria-label="Edit"></p-button>
+											 <p-button 
+												 icon="pi pi-trash" 
+												 [rounded]="true" 
+												 [text]="true" 
+												 severity="danger" 
+												 (click)="deleteItem(item.id)" 
+												 pTooltip="Delete Freshener"
+												 tooltipPosition="top"
+												 aria-label="Delete"></p-button>
+										 </div>
+									 </div>
+									<div class="mt-2 border-t border-dashed border-surface-300"></div>
 					 			 </p-fluid>
 					 		}} @else {
 					 	 		<p>No air fresheners found.</p>
