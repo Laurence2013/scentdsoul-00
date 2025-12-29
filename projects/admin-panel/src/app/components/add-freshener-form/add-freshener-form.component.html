@@ -1,3 +1,9 @@
-<p>
-  add-freshener-form works!
-</p>
+<div class="flex flex-col gap-4">
+	<section>
+		<b>Car Air Freshener name: </b><input pInputText [(ngModel)]="item.name" placeholder="Name">
+	</section>
+	<div class="flex justify-end gap-2">
+		<p-button label="Cancel" (click)="close()" severity="secondary" [text]="true"></p-button>
+		<p-button label="Save" (clikc)="save()"></p-button>
+	</div>
+</div>

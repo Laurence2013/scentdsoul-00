@@ -56,7 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	public addNewItem(){
 		this.ref = this.dialogService.open(AddFreshenerFormComponent, {
 			header: 'Add New Car Air Freshener',
-			width: '400px',
+			width: '600px',
 			modal: true,
 			breakpoints: {
 				'960px': '75vw',
