@@ -16,15 +16,17 @@
     <main class="flex-1 overflow-y-auto p-6">
       <div class="grid grid-cols-1 gap-4">
          <p-card>
+					 <h1 id="title-00"><b>Car Air Fresheners</b></h1>
 					 @if(caf00$ | async; as data){
 					 	 @if(data.length > 0){
 					 		 @for(item of data; track item.id){
 					 			 <p-fluid>
 					 				 <div class="flex flex-col gap-2">
 					 					 <label>
-					 						 <h2>Type: {{ item.name }}</h2>
-					 						 <h3>Other type: {{ item.another_name }}</h3>
+											 <h2 class="capitalize"><b>Type:</b> {{ item.name }}</h2>
+											 <h3 class="capitalize"><b>Other type:</b> {{ item.another_name || 'Nothing'}}</h3>
 					 					 </label>
+										 <div class="mt-2 border-t border-dashed border-surface-300"></div>
 					 				 </div>
 					 			 </p-fluid>
 					 		}} @else {
@@ -34,7 +36,7 @@
 					 				<p-progressspinner ariaLabel="loading" styleClass="w-16 h-16" strokeWidth="4"></p-progressspinner>
 					 			</div>
 					 } @else {
-						 <p>Dashboard</p>
+						 <p>Some stats goes here...</p>
 					 }
 				 </p-card>
       </div>
