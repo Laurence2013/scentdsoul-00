@@ -18,4 +18,7 @@ export class DataService {
 			return collectionData(getCAFs, {idField: 'id'}) as Observable<CarAirFreshenersModel[]>;
 		})
 	}
+	public addNewCarAirFreshener(newItem: any){
+		console.log(newItem);
+	}
 }

@@ -4,6 +4,11 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
 import { FormsModule } from '@angular/forms';
+import { Timestamp } from '@angular/fire/firestore';
+
+import { CarAirFreshenersModel } from '../../../../models/car-air-fresheners.model';
+
+export type CreateCarAirFreshener = Omit<CarAirFreshenersModel, 'id'>;
 
 @Component({
   selector: 'app-add-freshener-form',
@@ -16,7 +21,7 @@ export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
 	
-	public item = { name: '', another_name: '', other_name: '' };
+	public item: CreateCarAirFreshener = { name: '', another_name: '', other_name: '', createdAt: Timestamp.now() };
 
   public ngOnInit(){}
 	public save(){

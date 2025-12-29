@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, DestroyRef } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Card } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -19,7 +20,7 @@ import { CarAirFreshenersModel } from '../../models/car-air-fresheners.model';
 import { AddFreshenerFormComponent } from './components/add-freshener-form/add-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
-import { tap, delay } from 'rxjs/operators';
+import { tap, map, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	private carAirFresheners$ = this.dataService.getCarAirFresheners();
 	private router = inject(Router);
 	private dialogService = inject(DialogService);
+	private destrofRef = inject(DestroyRef);
 	private ref: DynamicDialogRef<AddFreshenerFormComponent> | undefined | null;
 
 	public sidebarVisible = false;
@@ -63,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
 				'640px': '90vw'
 			}
 		});
-		this.ref?.onClose.subscribe((newItem: AddFreshenerFormComponent) => {
+		this.ref?.onClose.pipe(takeUntilDestroyed(this.destrofRef)).subscribe((newItem: AddFreshenerFormComponent) => {
 			if(newItem){
 				console.log('Received from dialog: ', newItem)
 			}
@@ -75,5 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	public deleteItem(id: number){
 		console.log('Deleting item with ID:', id);
 	}
-	public ngOnDestroy(){}
+	public ngOnDestroy(){
+		if(this.ref) this.ref.close();
+	}
 }
