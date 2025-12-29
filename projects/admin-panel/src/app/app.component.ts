@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -29,13 +29,13 @@ import { tap, delay } from 'rxjs/operators';
 	providers: [DialogService],
 	imports: [CommonModule, Avatar, Card, ButtonModule, FluidModule, ProgressSpinner, TooltipModule]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
 	private dataService = inject(DataService);
 	private carAirFresheners$ = this.dataService.getCarAirFresheners();
 	private router = inject(Router);
 	private dialogService = inject(DialogService);
-	private ref: DynamicDialogRef<AddFreshenerFormComponent> | null | undefined;
+	private ref: DynamicDialogRef<AddFreshenerFormComponent> | undefined | null;
 
 	public sidebarVisible = false;
 	public caf00$: Observable<CarAirFreshenersModel[]> = EMPTY;
@@ -63,6 +63,11 @@ export class AppComponent implements OnInit {
 				'640px': '90vw'
 			}
 		});
+		this.ref?.onClose.subscribe((newItem: AddFreshenerFormComponent) => {
+			if(newItem){
+				console.log('Received from dialog: ', newItem)
+			}
+		});
 	}
 	public editItem(item: any){
 		console.log(item);
@@ -70,4 +75,5 @@ export class AppComponent implements OnInit {
 	public deleteItem(id: number){
 		console.log('Deleting item with ID:', id);
 	}
+	public ngOnDestroy(){}
 }
