@@ -16,8 +16,11 @@
     <main class="flex-1 overflow-y-auto p-6">
       <div class="grid grid-cols-1 gap-4">
          <p-card>
-					 <h1 id="title-00"><b>Car Air Fresheners</b></h1>
 					 @if(caf00$ | async; as data){
+						 <div class="flex items-center justify-between mb-4">
+							 <h1 id="title-00" class="text-xl font-bold">Car Air Fresheners</h1>
+							 <p-button icon="pi pi-plus" [rounded]="true" [text]="true" severity="secondary" (click)="addNewItem()"></p-button>
+						 </div>
 					 	 @if(data.length > 0){
 					 		 @for(item of data; track item.id){
 					 			 <p-fluid>

@@ -46,4 +46,7 @@ export class AppComponent implements OnInit {
 	public car_air_fresheners(){
 		this.caf00$ = this.carAirFresheners$.pipe(delay(2000));
 	}
+	public addNewItem(){
+		console.log('Add new item');
+	}
 }
