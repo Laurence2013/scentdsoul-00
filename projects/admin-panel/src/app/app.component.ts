@@ -6,6 +6,7 @@ import { Card } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { FluidModule } from 'primeng/fluid';
 import { Avatar } from 'primeng/avatar';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 import { DataService } from './service/firestore/data-service';
 
@@ -21,7 +22,7 @@ import { tap, delay } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 	standalone: true,
-	imports: [CommonModule, Avatar, Card, ButtonModule, FluidModule]
+	imports: [CommonModule, Avatar, Card, ButtonModule, FluidModule, ProgressSpinner]
 })
 export class AppComponent implements OnInit {
 
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
 
 	public sidebarVisible = false;
 	public caf00$: Observable<CarAirFreshenersModel[]> = EMPTY;
+	
+	public readonly EMPTY = EMPTY;
 
   public constructor(){}
   public ngOnInit(){
