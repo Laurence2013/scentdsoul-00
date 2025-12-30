@@ -17,7 +17,7 @@ import { environment } from '../environments/environment';
 
 import { CarAirFreshenersModel } from '../../models/car-air-fresheners.model';
 
-import { AddFreshenerFormComponent } from './components/add-freshener-form/add-freshener-form.component';
+import { AddFreshenerFormComponent, CreateCarAirFreshener } from './components/add-freshener-form/add-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
 import { tap, map, delay } from 'rxjs/operators';
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	private router = inject(Router);
 	private dialogService = inject(DialogService);
 	private destrofRef = inject(DestroyRef);
-	private ref: DynamicDialogRef<AddFreshenerFormComponent> | undefined | null;
+	private ref: DynamicDialogRef<AddFreshenerFormComponent> | null = null;
 
 	public sidebarVisible = false;
 	public caf00$: Observable<CarAirFreshenersModel[]> = EMPTY;
@@ -65,13 +65,12 @@ export class AppComponent implements OnInit, OnDestroy {
 				'640px': '90vw'
 			}
 		});
-		const newCaf00$ = this.ref?.onClose.pipe(map((newCAF: CarAirFreshenersModel) => (({...newCAF}))));
-
-		/*this.ref?.onClose.pipe(takeUntilDestroyed(this.destrofRef)).subscribe((newItem: AddFreshenerFormComponent) => {
-			if(newItem){
-				console.log('Received from dialog: ', newItem)
-			}
-		});*/
+		if(this.ref){
+			const newCaf00$: Observable<CarAirFreshenersModel> = this.ref.onClose.pipe(map((newCAF: CarAirFreshenersModel) => (({...newCAF}))));
+			this.dataService.addNewCarAirFreshener(newCaf00$);
+		}else{
+			console.log('Not working at app.component.ts');
+		}
 	}
 	public editItem(item: any){
 		console.log(item);
