@@ -66,8 +66,10 @@ export class AppComponent implements OnInit, OnDestroy {
 			}
 		});
 		if(this.ref){
-			const newCaf00$: Observable<CarAirFreshenersModel> = this.ref.onClose.pipe(map((newCAF: CarAirFreshenersModel) => (({...newCAF}))));
-			this.dataService.addNewCarAirFreshener(newCaf00$);
+			const newCaf00$: Observable<CarAirFreshenersModel> = this.ref.onClose;
+			this.dataService.addNewCarAirFreshener(newCaf00$).pipe(
+				takeUntilDestroyed(this.destrofRef)
+			).subscribe(console.log);
 		}else{
 			console.log('Not working at app.component.ts');
 		}
