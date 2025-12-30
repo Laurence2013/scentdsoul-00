@@ -22,7 +22,7 @@
 							 <p-button icon="pi pi-plus" [rounded]="true" [text]="true" severity="secondary" pTooltip="Add Item" tooltipPosition="top" (click)="addNewItem()"></p-button>
 						 </div>
 					 	 @if(data.length > 0){
-					 		 @for(item of data; track item.id){
+					 		 @for(item of data; track item.name){
 					 			 <p-fluid>
 									 <div class="flex items-start justify-between py-3">
 										 <div class="flex flex-col gap-1">
@@ -47,7 +47,7 @@
 												 [rounded]="true" 
 												 [text]="true" 
 												 severity="danger" 
-												 (click)="deleteItem(item.id)" 
+												 (click)="deleteItem(item.name)" 
 												 pTooltip="Delete Freshener"
 												 tooltipPosition="top"
 												 aria-label="Delete"></p-button>

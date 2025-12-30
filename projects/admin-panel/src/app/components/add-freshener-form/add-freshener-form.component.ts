@@ -8,8 +8,6 @@ import { Timestamp } from '@angular/fire/firestore';
 
 import { CarAirFreshenersModel } from '../../../../models/car-air-fresheners.model';
 
-export type CreateCarAirFreshener = Omit<CarAirFreshenersModel, 'id'>;
-
 @Component({
   selector: 'app-add-freshener-form',
   templateUrl: './add-freshener-form.component.html',
@@ -21,7 +19,7 @@ export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
 	
-	public item: CreateCarAirFreshener = { name: '', another_name: '', other_name: '', createdAt: Timestamp.now() };
+	public item: CarAirFreshenersModel = { name: '', another_name: '', other_name: '', createdAt: Timestamp.now() };
 
   public ngOnInit(){}
 	public save(){

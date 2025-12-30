@@ -17,10 +17,10 @@ import { environment } from '../environments/environment';
 
 import { CarAirFreshenersModel } from '../../models/car-air-fresheners.model';
 
-import { AddFreshenerFormComponent, CreateCarAirFreshener } from './components/add-freshener-form/add-freshener-form.component';
+import { AddFreshenerFormComponent } from './components/add-freshener-form/add-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
-import { tap, map, delay } from 'rxjs/operators';
+import { tap, map, filter, delay, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -66,8 +66,9 @@ export class AppComponent implements OnInit, OnDestroy {
 			}
 		});
 		if(this.ref){
-			const newCaf00$: Observable<CarAirFreshenersModel> = this.ref.onClose;
-			this.dataService.addNewCarAirFreshener(newCaf00$).pipe(
+			this.ref.onClose.pipe(
+				filter(data00 => !!data00),
+				switchMap((data01: CarAirFreshenersModel) => this.dataService.addNewCarAirFreshener00(data01)),
 				takeUntilDestroyed(this.destrofRef)
 			).subscribe(console.log);
 		}else{
@@ -77,8 +78,8 @@ export class AppComponent implements OnInit, OnDestroy {
 	public editItem(item: any){
 		console.log(item);
 	}
-	public deleteItem(id: number){
-		console.log('Deleting item with ID:', id);
+	public deleteItem(name: string){
+		console.log('Deleting item with ID:', name);
 	}
 	public ngOnDestroy(){
 		if(this.ref) this.ref.close();
