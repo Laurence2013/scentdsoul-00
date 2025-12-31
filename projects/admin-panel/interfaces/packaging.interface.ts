@@ -1,6 +1,31 @@
 import { Timestamp } from '@angular/fire/firestore';
 import { PlatformType } from './prices.interface';
 
-export type unit = 'g' | 'kg' | 'oz';
+export type WeightUnit = 'g' | 'kg' | 'oz';
+export type DimensionUnit = 'cm' | 'in';
 
-export interface Packaging {}
+export interface Packaging {
+	id?: string;
+	description?: string;
+	labellingCost: number;
+	materialCost: number;
+	otherCosts: number;
+	otherCostDesc?: string;
+	dimensions: {
+		length: number;
+		width: number;
+		height: number;
+		unit: DimensionUnit;
+	};
+	weight: {
+		value: number;
+		unit: WeightUnit;
+	}
+	platformRules?: {
+		platform: PlatformType;
+		additionalWeight: number;
+		packagingSurcharge: number;
+		description?: string;
+	}[];
+	createdAt: Timestamp;
+}
