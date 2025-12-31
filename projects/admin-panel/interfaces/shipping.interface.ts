@@ -10,7 +10,17 @@ export interface Shipping {
 	serviceName: string // e.g., "Tracked 48", "Standard International"
 	speed: DeliverySpeed;
 	isTracked: boolean;
-	vatRate?: boolean;
-	shipping:  ShippingCategory;
+	isInternational: boolean;
+	vatRate: boolean;
+	category:  ShippingCategory;
+	metadata?: RoyalMailMetadata | FedExMetadata | Record<string, any>;
 	createdAt: Timestamp;
+	updatedAt: Timestamp;
+};
+interface RoyalMailMetadata {
+	serviceCode: string;
+	contractId: string;
+};
+interface FedExMetadata {
+	fedexZone: number;
 }
