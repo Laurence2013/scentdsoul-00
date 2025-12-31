@@ -1,19 +1,18 @@
 import { Timestamp } from '@angular/fire/firestore';
 import { ShippingAddress } from './shipping.interface';
 import { ScentTypes } from './car-air-fresheners.interface';
+import { PlatformType } from './prices.interface';
 
-export type SalesPlatform = 'Web_Store' | 'Instagram' | 'TikTok' | 'eBay'
+export type Status = 'PENDING' | 'SHIPPED' | 'DELIVERED';
 
-export interface CustomerInterface {
-	id?: string;
-	totalPrice: string;
+export interface CustomerInfo {
+	customerId?: string;
 	personalInfo: {
 		firstName: string;
 		lastName: string;
 		phone?: string;
 		email: string;
 	};
-	salesPlatform: SalesPlatform;
 	address: ShippingAddress;
 	createdAt: Timestamp;
 }
@@ -24,4 +23,14 @@ export interface PurchasedItem {
 	quantity: number;
 	priceAtPurchase: string;
 	boughtAt: Timestamp;
+}
+export interface CustomerOrder {
+	id?:string;
+	customerId: string;
+	items: PurchasedItem[];
+	totalPrice: string;
+	salePlatform: PlatformType;
+	shippingId?: string;
+	status: Status;
+	createdAt: Timestamp;
 }

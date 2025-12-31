@@ -5,7 +5,7 @@ export type CarrierName = 'ROYAL_MAIL' | 'EVRI' | 'DPD' | 'UPS' | 'FEDEX';
 export type DeliverySpeed = 'NEXT_DAY' | 'STANDARD' | 'ECONOMY' | 'EXPRESS';
 
 export interface Shipping {
-	id?: string;
+	shippingId?: string;
 	carrier: CarrierName;
 	serviceName: string // e.g., "Tracked 48", "Standard International"
 	speed: DeliverySpeed;
