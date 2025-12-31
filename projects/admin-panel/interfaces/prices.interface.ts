@@ -6,26 +6,25 @@ export type AdjustmentType = 'FIXED' | 'PERCENTAGE';
 
 export interface StorePrice {
 	id?: string;
-	basePrice: number;
-	platformPrices: PlatformPrice[];
-	seasonalPrices?: SeasonalPrice[];
+	price: number;
+	platformPrices: PlatformPrices[];
+	seasonalPrices?: SeasonalPrices[];
 	createdAt: Timestamp;
 }
-export interface PlatformPrice {
+export interface PlatformPrices {
 	id?: string;
 	listingPrice: number;
-	platform: PlatformType;
+	platformType: PlatformType;
 	currencyCode: CurrencyCode;
 	platformFeePercentage: number;
 	fixedTransactionalFee: number;
 	createdAt: Timestamp;
 }
-export interface SeasonalPrice {
+export interface SeasonalPrices {
 	id?: string;
 	seasonName: string;
 	description: string;
 	adjustmentType: AdjustmentType;
-	adjustmentValue: number;
 	startDate: Date;
 	endDate: Date;
 	createdAt: Timestamp;
