@@ -12,7 +12,7 @@ export interface Shipping {
 	isTracked: boolean;
 	isInternational: boolean;
 	vatRate: boolean;
-	category:  ShippingCategory;
+	category: ShippingCategory;
 	metadata?: RoyalMailMetadata | FedExMetadata | Record<string, any>;
 	createdAt: Timestamp;
 	updatedAt: Timestamp;
