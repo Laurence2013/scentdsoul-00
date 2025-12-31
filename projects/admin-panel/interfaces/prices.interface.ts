@@ -1,14 +1,14 @@
 import { Timestamp } from '@angular/fire/firestore';
+import { SeasonalOffers } from './offers.interface';
 
-export type PlatformType = 'Own_Store' | 'Instagram' | 'TikTok' | 'eBay'
+export type PlatformType = 'Web_Store' | 'Instagram' | 'TikTok' | 'eBay'
 export type CurrencyCode = 'USD' | 'GBP' | 'EUR';
-export type AdjustmentType = 'FIXED' | 'PERCENTAGE';
 
 export interface StorePrice {
 	id?: string;
 	basePrice: number;
 	platformPrices: PlatformPrice[];
-	seasonalPrices?: SeasonalPrice[];
+	seasonalPrices?: SeasonalOffers[];
 	createdAt: Timestamp;
 }
 export interface PlatformPrice {
@@ -18,15 +18,5 @@ export interface PlatformPrice {
 	currencyCode: CurrencyCode;
 	platformFeePercentage: number;
 	fixedTransactionalFee: number;
-	createdAt: Timestamp;
-}
-export interface SeasonalPrice {
-	id?: string;
-	seasonName: string;
-	description: string;
-	adjustmentType: AdjustmentType;
-	adjustmentValue: number;
-	startDate: Date;
-	endDate: Date;
 	createdAt: Timestamp;
 }

@@ -11,16 +11,25 @@ export interface Shipping {
 	speed: DeliverySpeed;
 	isTracked: boolean;
 	isInternational: boolean;
-	vatRate: boolean;
+	vatRate?: number;
 	category: ShippingCategory;
 	metadata?: RoyalMailMetadata | FedExMetadata | Record<string, any>;
 	createdAt: Timestamp;
 	updatedAt: Timestamp;
 };
-interface RoyalMailMetadata {
+export interface RoyalMailMetadata {
 	serviceCode: string;
 	contractId: string;
 };
-interface FedExMetadata {
+export interface FedExMetadata {
 	fedexZone: number;
+}
+export interface ShippingAddress {
+	houseNumber: number;
+	firstLineOfAddress: string;
+	secondLineOfAddress: string;
+	thirdLineOfAddress: string;
+	postcode: string;
+	county: string;
+	createdAt: Timestamp;
 }
