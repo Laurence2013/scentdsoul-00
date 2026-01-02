@@ -18,12 +18,10 @@ import { Brand, Scent } from '../../../../interfaces/car-air-fresheners.interfac
 export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
-	
-	public brand00: Brand = { brandId: '', by_type: '', sub_type: '', by_brand: '', by_scent: [], price: [], createdAt: Timestamp.now() };
 
   public ngOnInit(){}
 	public save(){
-		this.ref.close(this.brand00);
+		this.ref.close();
 	}
 	public close(){
 		this.ref.close();

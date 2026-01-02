@@ -7,8 +7,6 @@ export type SubScentTypes = 'Hanging' | 'Stick' |'Electric Diffuser' | 'Pouch';
 
 export interface Brand {
 	brandId: string;
-	by_type: string;
-	sub_type?: string;
 	by_brand: string;
 	by_scent: Scent[];
 	createdAt: Timestamp;
@@ -17,7 +15,7 @@ export interface Scent {
 	scentId: string;
 	name: string;
 	description: string;
-	scents: ScentTypes;
-	sub_type?: SubScentTypes;
+	scent_type: ScentTypes;
+	scent_sub_type?: SubScentTypes;
 	price: StorePrice;
 }
