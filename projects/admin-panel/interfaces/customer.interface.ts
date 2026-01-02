@@ -6,7 +6,7 @@ import { PlatformType } from './prices.interface';
 export type Status = 'PENDING' | 'SHIPPED' | 'DELIVERED';
 
 export interface CustomerInfo {
-	customerId?: string;
+	customerId: string;
 	personalInfo: {
 		firstName: string;
 		lastName: string;
@@ -17,6 +17,7 @@ export interface CustomerInfo {
 	createdAt: Timestamp;
 }
 export interface PurchasedItem {
+	purchasedItemId: string;
 	brandName: string;
 	scentName: string;
 	scentType: ScentTypes;
@@ -25,7 +26,7 @@ export interface PurchasedItem {
 	boughtAt: Timestamp;
 }
 export interface CustomerOrder {
-	id?:string;
+	customerOrderId: string;
 	customerId: string;
 	items: PurchasedItem[];
 	totalPrice: string;

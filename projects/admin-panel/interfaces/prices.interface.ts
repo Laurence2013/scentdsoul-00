@@ -5,14 +5,14 @@ export type PlatformType = 'Web_Store' | 'Instagram' | 'TikTok_Shop' | 'eBay'
 export type CurrencyCode = 'USD' | 'GBP' | 'EUR';
 
 export interface StorePrice {
-	id?: string;
+	storePriceId: string;
 	basePrice: number;
 	platformPrices: PlatformPrice[];
 	seasonalPrices?: SeasonalOffers[];
 	createdAt: Timestamp;
 }
 export interface PlatformPrice {
-	id?: string;
+	platformPriceId: string;
 	listingPrice: number;
 	platform: PlatformType;
 	currencyCode: CurrencyCode;

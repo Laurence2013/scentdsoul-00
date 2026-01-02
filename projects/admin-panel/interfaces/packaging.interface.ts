@@ -5,7 +5,7 @@ export type WeightUnit = 'g' | 'kg' | 'oz';
 export type DimensionUnit = 'cm' | 'in';
 
 export interface Packaging {
-	id?: string;
+	packagingId: string;
 	description?: string;
 	labellingCost: number;
 	materialCost: number;

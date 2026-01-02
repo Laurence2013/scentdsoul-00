@@ -6,7 +6,7 @@ export interface Offers {}
 export interface DiscountOffers {}
 export interface SpecialOccassionOffers {}
 export interface SeasonalOffers {
-	id?: string;
+	seasonalOffersId: string;
 	seasonName: string;
 	description: string;
 	adjustmentType: AdjustmentType;

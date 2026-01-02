@@ -5,7 +5,7 @@ export type CarrierName = 'ROYAL_MAIL' | 'EVRI' | 'DPD' | 'UPS' | 'FEDEX';
 export type DeliverySpeed = 'NEXT_DAY' | 'STANDARD' | 'ECONOMY' | 'EXPRESS';
 
 export interface Shipping {
-	shippingId?: string;
+	shippingId: string;
 	carrier: CarrierName;
 	serviceName: string // e.g., "Tracked 48", "Standard International"
 	speed: DeliverySpeed;
@@ -18,13 +18,16 @@ export interface Shipping {
 	updatedAt: Timestamp;
 };
 export interface RoyalMailMetadata {
+	royalMailMetadataId: string;
 	serviceCode: string;
 	contractId: string;
 };
 export interface FedExMetadata {
+	fedExMetadataId: string;
 	fedexZone: number;
 }
 export interface ShippingAddress {
+	shippingAddressId: string;
 	houseNumber: number;
 	firstLineOfAddress: string;
 	secondLineOfAddress: string;
