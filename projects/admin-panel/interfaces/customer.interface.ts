@@ -27,7 +27,6 @@ export interface PurchasedItem {
 }
 export interface CustomerOrder {
 	customerOrderId: string;
-	customerId: string;
 	items: PurchasedItem[];
 	totalPrice: string;
 	salePlatform: PlatformType;

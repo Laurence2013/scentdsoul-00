@@ -6,17 +6,18 @@ export type ScentTypes = 'Cardboard' | 'Vent Clip' | 'Spray' | 'Plug-in' | 'Bag'
 export type SubScentTypes = 'Hanging' | 'Stick' |'Electric Diffuser' | 'Pouch';
 
 export interface Brand {
-	brand_id: string;
+	brandId: string;
 	by_type: string;
 	sub_type?: string;
 	by_brand: string;
 	by_scent: Scent[];
-	price: StorePrice[];
 	createdAt: Timestamp;
 }
 export interface Scent {
-	scent_id: string;
+	scentId: string;
 	name: string;
+	description: string;
 	scents: ScentTypes;
 	sub_type?: SubScentTypes;
+	price: StorePrice;
 }
