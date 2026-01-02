@@ -1,0 +1,30 @@
+import { Timestamp } from '@angular/fire/firestore';
+import { Brand, Scent, ScentTypes, SubScentTypes } from '../interfaces/car-air-fresheners.interface';
+import { StorePrice } from '../interfaces/prices.interface';
+
+import { Prices } from './prices.model';
+
+export class Brands implements Brand {
+
+	public brandId = crypto.randomUUID();
+	public by_brand = '';
+	public by_scent: Scent[] = [new Scents()];
+	public createdAt = Timestamp.now();
+
+	public constructor(data?: Partial<Brand>){
+		if(data){Object.assign(this, data)}
+	}
+}
+export class Scents implements Scent {
+
+	public scentId = crypto.randomUUID();
+	public name = '';
+	public description = '';
+	public scent_type: ScentTypes = 'Cardboard';
+	public scent_sub_type?: SubScentTypes = 'Hanging';
+	public price: StorePrice = new Prices();
+
+	public constructor(data?: Partial<Scent>){
+		if(data){Object.assign(this, data)}
+	}
+}
