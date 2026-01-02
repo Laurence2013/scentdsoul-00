@@ -15,7 +15,7 @@ import { DataService } from './service/firestore/data-service';
 
 import { environment } from '../environments/environment';
 
-import { CarAirFreshenersModel } from '../../models/car-air-fresheners.model';
+import { Brand, Scent } from '../../interfaces/car-air-fresheners.interface';
 
 import { AddFreshenerFormComponent } from './components/add-freshener-form/add-freshener-form.component';
 
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	private ref: DynamicDialogRef<AddFreshenerFormComponent> | null = null;
 
 	public sidebarVisible = false;
-	public caf00$: Observable<CarAirFreshenersModel[]> = EMPTY;
+	public caf00$: Observable<Brand[]> = EMPTY;
 	
 	public readonly EMPTY = EMPTY;
 
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit, OnDestroy {
 		if(this.ref){
 			this.ref.onClose.pipe(
 				filter(data00 => !!data00),
-				switchMap((data01: CarAirFreshenersModel) => this.dataService.addNewCarAirFreshener00(data01)),
+				switchMap((data01: Brand) => this.dataService.addNewCarAirFreshener00(data01)),
 				takeUntilDestroyed(this.destrofRef)
 			).subscribe(console.log);
 		}else{

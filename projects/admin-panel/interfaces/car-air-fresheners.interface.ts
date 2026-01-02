@@ -13,7 +13,7 @@ export interface Brand {
 	price: StorePrice[];
 	createdAt: Timestamp;
 }
-interface Scent {
+export interface Scent {
 	name: string;
 	scents: ScentTypes;
 	sub_type?: SubScentTypes;
