@@ -15,7 +15,7 @@ import { DataService } from './service/firestore/data-service';
 
 import { environment } from '../environments/environment';
 
-import { Brand, Scent } from '../../interfaces/car-air-fresheners.interface';
+import { Brand, Scent } from '../interfaces/car-air-fresheners.interface';
 
 import { AddFreshenerFormComponent } from './components/add-freshener-form/add-freshener-form.component';
 

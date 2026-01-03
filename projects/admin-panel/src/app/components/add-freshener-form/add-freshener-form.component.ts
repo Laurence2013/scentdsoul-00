@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { Timestamp } from '@angular/fire/firestore';
 
-import { Brand, Scent } from '../../../../interfaces/car-air-fresheners.interface';
+import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
 
 @Component({
   selector: 'app-add-freshener-form',

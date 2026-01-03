@@ -11,7 +11,8 @@ module.exports = function (config) {
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
 			require('karma-spec-reporter'),
-			require('@angular-devkit/build-angular/plugins/karma') // Added the essential Angular plugin
+			//require('jasmine-spec-reporter'),
+			//require('@angular/build/plugins/karma') // Added the essential Angular plugin
     ],
     client: {
       jasmine: {
@@ -26,10 +27,19 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
 		specReporter: {
+			lateReport: false,
+			maxLogLines: 5,
+			prefixes: {
+				success: '✓ ',
+				failure: '✗ ',
+				skipped: '- '
+			},
       spec: {
+				displayErrorMessages: true,
         displayStacktrace: 'path',
         displaySuccesses: true,
         displayFailures: true,
+				dislaySkipped: true,
         displayDuration: true
       }
     },

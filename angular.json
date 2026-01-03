@@ -196,6 +196,7 @@
               "zone.js/testing"
             ],
             "tsConfig": "projects/admin-panel/tsconfig.spec.json",
+						"karmaConfig": "projects/admin-panel/karma.conf.js",
             "assets": [
               {
                 "glob": "**/*",

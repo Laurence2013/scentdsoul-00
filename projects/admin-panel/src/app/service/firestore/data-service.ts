@@ -4,7 +4,7 @@ import { Firestore, collection, collectionData, addDoc, Timestamp } from '@angul
 import { Observable, EMPTY, from } from 'rxjs';
 import { map, filter, switchMap } from 'rxjs/operators';
 
-import { Brand, Scent } from '../../../../interfaces/car-air-fresheners.interface';
+import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
 
 @Injectable({
   providedIn: 'root',
