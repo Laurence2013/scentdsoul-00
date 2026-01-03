@@ -1,6 +1,7 @@
 import { Timestamp } from '@angular/fire/firestore';
 
 import { Brands, Scents } from '../car-air-fresheners.model';
+import { Prices } from '../prices.model';
 
 describe('Car Air Freshener Models', () => {
 	describe('Brands and Scents Class', () => {
@@ -35,6 +36,37 @@ describe('Car Air Freshener Models', () => {
 
 			expect(brand.by_scent.length).toBe(1);
 			expect(brand.by_scent[0].name).toBe('California scents');
+		});
+		it('should create a full brand hierarchy', () => {
+			const brand = new Brands({
+				by_brand: 'California scent',
+				by_scent: [new Scents({name: 'Cherry', scent_type: 'Bag'})]
+			});
+			expect(brand.by_brand).toBe('California scent');
+			expect(brand.by_scent[0].name).toBe('Cherry');
+			expect(brand.by_scent[0].scent_type).toBe('Bag');
+		});
+	});
+	describe('Scents Class', () => {
+		it('should initialise with default ScentTypes and SubScentTypes', () => {
+			const scent = new Scents();
+
+			expect(scent.scent_type).toBe('Cardboard');
+			expect(scent.scent_sub_type).toBe('Hanging');
+			});
+		it('should correctly assign provided scent types', () => {
+			const scent = new Scents({
+				scent_type: 'Vent Clip',
+				scent_sub_type: 'Stick'
+			});
+			expect(scent.scent_type).toBe('Vent Clip');
+			expect(scent.scent_sub_type).toBe('Stick');
+		});
+		it('should test Scents instance of Price Class', () => {
+			const priceDefault = new Prices();
+			const scent = new Scents({price: priceDefault});
+
+			expect(scent.price instanceof Prices).toBeTrue();
 		});
 	});
 });
