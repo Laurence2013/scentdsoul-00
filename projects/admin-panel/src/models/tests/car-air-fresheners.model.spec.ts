@@ -62,11 +62,13 @@ describe('Car Air Freshener Models', () => {
 			expect(scent.scent_type).toBe('Vent Clip');
 			expect(scent.scent_sub_type).toBe('Stick');
 		});
-		it('should test Scents instance of Price Class', () => {
+		it('should test Scents instance of Price Class and default price', () => {
 			const priceDefault = new Prices();
 			const scent = new Scents({price: priceDefault});
 
 			expect(scent.price instanceof Prices).toBeTrue();
+			expect(scent.price.basePrice).toBe(0.00);
+			expect(scent.price.basePrice).not.toBe(1.99);
 		});
 	});
 });
