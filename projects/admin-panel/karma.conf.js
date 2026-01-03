@@ -39,7 +39,7 @@ module.exports = function (config) {
         displayStacktrace: 'path',
         displaySuccesses: true,
         displayFailures: true,
-				dislaySkipped: true,
+				displaySkipped: true,
         displayDuration: true
       }
     },
@@ -51,7 +51,7 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
-    reporters: ['progress', 'kjhtml', 'spec'],
+    reporters: ['spec', 'kjhtml'],
     browsers: ['Chrome'],
 		customLaunchers: {
 			ChromeHeadlessCI: {
