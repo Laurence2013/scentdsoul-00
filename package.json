@@ -12,6 +12,7 @@
     "test:admin-panel": "ng test admin-panel --no-cache",
     "test:admin-panel:headless:ci": "ng test admin-panel --no-watch --no-progress --browsers=ChromeHeadless",
     "test:admin-panel:headless:models": "ng test admin-panel --no-watch --include **/models/tests/**/*.spec.ts --browsers=ChromeHeadless",
+		"test:admin-panel:code-coverage": "ng test admin-panel --no-watch --code-coverage",
     "lint": "ng lint",
     "ionic": "ionic serve --project=mobile-app"
   },
