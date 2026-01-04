@@ -5,7 +5,7 @@ import { connectFirestoreEmulator, getFirestore, provideFirestore } from '@angul
 import { Timestamp } from '@angular/fire/firestore';
 
 import { DataService } from '../data-service';
-import { createMockStorePrice } from './utils/test-utils';
+import { createMockStorePrice, createMockScents } from './utils/test-utils';
 
 import { Brand, Scent, ScentTypes, SubScentTypes } from '../../../../interfaces/car-air-fresheners.interface';
 import { StorePrice } from '../../../../interfaces/prices.interface';
@@ -30,7 +30,7 @@ describe('DataService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-	it('should add a new C.A.F and return it with an ID', done => {
+	it('should add a new C.A.F with an empty by_scent array, and return with an ID', done => {
 		const brand: Brand = ({
 			brandId: crypto.randomUUID(),
 			by_brand: 'California scent',
@@ -45,12 +45,44 @@ describe('DataService', () => {
 			done();
 		});
 	});
-	it('should add a new C.A.F and filling in the Scent object via Brand', done => {
+	it('should add a new C.A.F, returning by_scent with its defaults, and retun with and ID', done => {
 		const brand: Brand = ({
 			brandId: crypto.randomUUID(),
 			by_brand: 'California scent',
-			by_scent: [],
+			by_scent: createMockScents(),
 			createdAt: Timestamp.now()
+		});
+		service.addNewCarAirFreshener00(brand).subscribe(result => {
+			expect(result.by_brand).toBe('California scent');
+			expect(result.by_scent.length).toBeGreaterThan(0);
+			expect(result.by_scent[0].name).toBe('Some scent');
+			expect(result.by_scent[0].name).not.toBe('Another scent');
+			expect(result.by_scent[0].description).toBe('Some description');
+			expect(result.by_scent[0].scent_type).toBe('Cardboard');
+			expect(result.by_scent[0].price.basePrice).toBe(0.00);
+			expect(result.by_scent[0].price.basePrice).not.toBe(1.99);
+			expect(result.by_scent[0].price.platformPrices).toEqual([]);
+			expect(result.createdAt instanceof Timestamp).toBe(true);
+			done();
+		});
+	});
+	it('should add a new C.A.F, filling in by_scent via Brand, and retun with and ID', done => {
+		const brand: Brand = ({
+			brandId: crypto.randomUUID(),
+			by_brand: 'California scent',
+			by_scent: createMockScents([{
+				name: 'Corondar Cherry',
+				description: 'New smell of Corondar Cherry',
+				scent_type: 'Tin',
+			}]),
+			createdAt: Timestamp.now()
+		});
+		service.addNewCarAirFreshener00(brand).subscribe(result => {
+			expect(result.by_brand).toBe('California scent');
+			expect(result.by_scent.length).toBeGreaterThan(0);
+			expect(result.by_scent[0].name).toBe('Corondar Cherry');
+			expect(result.by_scent[0].name).not.toBe('Some scent');
+			done();
 		});
 	});
 });
