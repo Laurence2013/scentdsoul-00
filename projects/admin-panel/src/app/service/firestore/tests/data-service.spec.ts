@@ -156,4 +156,36 @@ describe('DataService', () => {
 			done();
 		});
 	});
+	it('should add new C.A.F, add custom data via Brand -> Scent -> StorePrice -> PlatformPrice, and return with ID', done => {
+		const brand: Brand = ({
+			brandId: crypto.randomUUID(),
+			by_brand: 'California scent',
+			by_scent: createMockScents([{
+				name: 'Corondar Cherry',
+				description: 'New smell of Corondar Cherry',
+				scent_type: 'Tin',
+				price: createMockStorePrice({
+					platformPrices: [createMockPlatformPrice({
+						listingPrice: 1.99,
+						currencyCode: 'USD'
+					})]
+				})
+			}]),
+			createdAt: Timestamp.now()
+		});
+		service.addNewCarAirFreshener00(brand).subscribe(result => {
+			expect(result.by_brand).toBe('California scent');
+
+			expect(Array.isArray(result.by_scent)).toBe(true);
+			expect(result.by_scent.length).toBeGreaterThan(0);
+			expect(result.by_scent).toBeDefined();
+			expect(result.by_scent[0].price).toBeDefined();
+
+			expect(result.by_scent[0].price.platformPrices[0].listingPrice).toBe(1.99);
+			expect(result.by_scent[0].price.platformPrices[0].listingPrice).not.toBe(0.00);
+			expect(result.by_scent[0].price.platformPrices[0].currencyCode).toBe('USD');
+			expect(result.by_scent[0].price.platformPrices[0].currencyCode).not.toBe('GBP');
+			done();
+		});
+	})
 });
