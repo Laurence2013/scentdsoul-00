@@ -47,7 +47,7 @@ describe('DataService', () => {
 			done();
 		});
 	});
-	it('should add a new C.A.F, returning by_scent with its defaults, and retun with and ID', done => {
+	it('should add a new C.A.F, returning by_scent with its defaults via Brand, and retun with ID', done => {
 		const brand: Brand = ({
 			brandId: crypto.randomUUID(),
 			by_brand: 'California scent',
@@ -73,7 +73,7 @@ describe('DataService', () => {
 			done();
 		});
 	});
-	it('should add a new C.A.F, filling in by_scent via Brand, and retun with and ID', done => {
+	it('should add a new C.A.F, filling in by_scent via Brand -> Scent, and retun with ID', done => {
 		const brand: Brand = ({
 			brandId: crypto.randomUUID(),
 			by_brand: 'California scent',
@@ -99,6 +99,35 @@ describe('DataService', () => {
 			expect(result.by_scent[0].price.basePrice).not.toBe(1.99);
 
 			expect(result.createdAt instanceof Timestamp).toBe(true);
+			done();
+		});
+	});
+	it('shoudl add new C.A.F, adding new basePrice via Brand -> Scent -> StorePrice, and return with ID', done => {
+		const brand: Brand = ({
+			brandId: crypto.randomUUID(),
+			by_brand: 'California scent',
+			by_scent: createMockScents([{
+				name: 'Corondar Cherry',
+				description: 'New smell of Corondar Cherry',
+				scent_type: 'Tin',
+				price: createMockStorePrice({basePrice: 1.99})
+			}]),
+			createdAt: Timestamp.now()
+		});
+		service.addNewCarAirFreshener00(brand).subscribe(result => {
+			expect(result.by_brand).toBe('California scent');
+
+			expect(Array.isArray(result.by_scent)).toBe(true);
+			expect(result.by_scent.length).toBeGreaterThan(0);
+			expect(result.by_scent).toBeDefined();
+
+			expect(result.by_scent[0].name).toBe('Corondar Cherry');
+			expect(result.by_scent[0].name).not.toBe('Some scent');
+			expect(result.by_scent[0].description).toBe('New smell of Corondar Cherry');
+			expect(result.by_scent[0].scent_type).toBe('Tin');
+			expect(result.by_scent[0].price.basePrice).toBe(1.99);
+			expect(result.by_scent[0].price.basePrice).not.toBe(0.00);
+
 			done();
 		});
 	});
