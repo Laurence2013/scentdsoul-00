@@ -59,6 +59,7 @@ describe('DataService', () => {
 
 			expect(Array.isArray(result.by_scent)).toBe(true);
 			expect(result.by_scent.length).toBeGreaterThan(0);
+			expect(result.by_scent).toBeDefined();
 
 			expect(result.by_scent[0].name).toBe('Some scent');
 			expect(result.by_scent[0].name).not.toBe('Another scent');
@@ -88,12 +89,14 @@ describe('DataService', () => {
 
 			expect(Array.isArray(result.by_scent)).toBe(true);
 			expect(result.by_scent.length).toBeGreaterThan(0);
-
 			expect(result.by_scent).toBeDefined();
+
 			expect(result.by_scent[0].name).toBe('Corondar Cherry');
 			expect(result.by_scent[0].name).not.toBe('Some scent');
 			expect(result.by_scent[0].description).toBe('New smell of Corondar Cherry');
 			expect(result.by_scent[0].scent_type).toBe('Tin');
+			expect(result.by_scent[0].price.basePrice).toBe(0.00);
+			expect(result.by_scent[0].price.basePrice).not.toBe(1.99);
 
 			expect(result.createdAt instanceof Timestamp).toBe(true);
 			done();

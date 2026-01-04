@@ -4,13 +4,14 @@ import { StorePrice } from '../../../../../interfaces/prices.interface';
 import { Scent, ScentTypes, SubScentTypes } from '../../../../../interfaces/car-air-fresheners.interface';
 
 export function createMockStorePrice(overrides: Partial<StorePrice> = {}): StorePrice{
-	return {
+	const defaultStorePrice: StorePrice = {
 		storePriceId: crypto.randomUUID(),
 		basePrice: 0.00,
 		platformPrices: [],
 		createdAt: Timestamp.now(),
 		...overrides
-	}
+	};
+	return Object.keys(overrides).length > 0 ? {...defaultStorePrice, ...overrides} : defaultStorePrice;
 }
 export function createMockScents(overrides: Partial<Scent>[] = []): Scent[]{
 	const defaultScent: Scent = {
