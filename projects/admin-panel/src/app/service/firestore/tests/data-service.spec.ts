@@ -5,7 +5,7 @@ import { connectFirestoreEmulator, getFirestore, provideFirestore } from '@angul
 import { Timestamp } from '@angular/fire/firestore';
 
 import { DataService } from '../data-service';
-import { createMockStorePrice, createMockScents } from './utils/test-utils';
+import { createMockStorePrice, createMockScents, createMockPlatformPrice } from './utils/test-utils';
 
 import { Brand, Scent, ScentTypes, SubScentTypes } from '../../../../interfaces/car-air-fresheners.interface';
 import { StorePrice } from '../../../../interfaces/prices.interface';
@@ -67,7 +67,7 @@ describe('DataService', () => {
 			expect(result.by_scent[0].scent_type).toBe('Cardboard');
 			expect(result.by_scent[0].price.basePrice).toBe(0.00);
 			expect(result.by_scent[0].price.basePrice).not.toBe(1.99);
-			expect(result.by_scent[0].price.platformPrices).toEqual([]);
+			expect(result.by_scent[0].price.platformPrices).toBeDefined();
 
 			expect(result.createdAt instanceof Timestamp).toBe(true);
 			done();
@@ -102,7 +102,7 @@ describe('DataService', () => {
 			done();
 		});
 	});
-	it('shoudl add new C.A.F, adding new basePrice via Brand -> Scent -> StorePrice, and return with ID', done => {
+	it('should add new C.A.F, adding new basePrice via Brand -> Scent -> StorePrice, and return with ID', done => {
 		const brand: Brand = ({
 			brandId: crypto.randomUUID(),
 			by_brand: 'California scent',
@@ -128,6 +128,31 @@ describe('DataService', () => {
 			expect(result.by_scent[0].price.basePrice).toBe(1.99);
 			expect(result.by_scent[0].price.basePrice).not.toBe(0.00);
 
+			done();
+		});
+	});
+	it('should add new C.A.F, get defaults via Brand -> Scent -> StorePrice -> PlatformPrice, and return with ID', done => {
+		const brand: Brand = ({
+			brandId: crypto.randomUUID(),
+			by_brand: 'California scent',
+			by_scent: createMockScents([{
+				name: 'Corondar Cherry',
+				description: 'New smell of Corondar Cherry',
+				scent_type: 'Tin'
+			}]),
+			createdAt: Timestamp.now()
+		});
+		service.addNewCarAirFreshener00(brand).subscribe(result => {
+			expect(result.by_brand).toBe('California scent');
+
+			expect(Array.isArray(result.by_scent)).toBe(true);
+			expect(result.by_scent.length).toBeGreaterThan(0);
+			expect(result.by_scent).toBeDefined();
+
+			expect(result.by_scent[0].price.platformPrices[0].listingPrice).toBe(0.00);
+			expect(result.by_scent[0].price.platformPrices[0].listingPrice).not.toBe(1.99);
+			expect(result.by_scent[0].price.platformPrices[0].platform).toBe('Web_Store');
+			expect(result.by_scent[0].price.platformPrices[0].currencyCode).toBe('GBP');
 			done();
 		});
 	});
