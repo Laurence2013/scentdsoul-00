@@ -40,7 +40,9 @@ describe('DataService', () => {
 		service.addNewCarAirFreshener00(brand).subscribe(result => {
 			expect(result.brandId).toBeDefined();
 			expect(result.brandId.length).toBeGreaterThan(0);
+
 			expect(result.by_brand).toBe('California scent');
+
 			expect(result.createdAt instanceof Timestamp).toBe(true);
 			done();
 		});
@@ -54,7 +56,10 @@ describe('DataService', () => {
 		});
 		service.addNewCarAirFreshener00(brand).subscribe(result => {
 			expect(result.by_brand).toBe('California scent');
+
+			expect(Array.isArray(result.by_scent)).toBe(true);
 			expect(result.by_scent.length).toBeGreaterThan(0);
+
 			expect(result.by_scent[0].name).toBe('Some scent');
 			expect(result.by_scent[0].name).not.toBe('Another scent');
 			expect(result.by_scent[0].description).toBe('Some description');
@@ -62,6 +67,7 @@ describe('DataService', () => {
 			expect(result.by_scent[0].price.basePrice).toBe(0.00);
 			expect(result.by_scent[0].price.basePrice).not.toBe(1.99);
 			expect(result.by_scent[0].price.platformPrices).toEqual([]);
+
 			expect(result.createdAt instanceof Timestamp).toBe(true);
 			done();
 		});
@@ -79,9 +85,17 @@ describe('DataService', () => {
 		});
 		service.addNewCarAirFreshener00(brand).subscribe(result => {
 			expect(result.by_brand).toBe('California scent');
+
+			expect(Array.isArray(result.by_scent)).toBe(true);
 			expect(result.by_scent.length).toBeGreaterThan(0);
+
+			expect(result.by_scent).toBeDefined();
 			expect(result.by_scent[0].name).toBe('Corondar Cherry');
 			expect(result.by_scent[0].name).not.toBe('Some scent');
+			expect(result.by_scent[0].description).toBe('New smell of Corondar Cherry');
+			expect(result.by_scent[0].scent_type).toBe('Tin');
+
+			expect(result.createdAt instanceof Timestamp).toBe(true);
 			done();
 		});
 	});
