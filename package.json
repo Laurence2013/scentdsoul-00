@@ -9,7 +9,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:admin-panel": "ng test admin-panel --no-cache",
+    "test:admin-panel": "ng test admin-panel --no-watch --include **/components/**/*.spec.ts --browsers=ChromeHeadlessCI",
     "test:admin-panel:headless:ci": "ng test admin-panel --no-watch --no-progress --browsers=ChromeHeadless",
     "test:admin-panel:headless:models": "ng test admin-panel --no-watch --include **/models/tests/**/*.spec.ts --browsers=ChromeHeadless",
     "test:admin-panel:headless:services": "ng test admin-panel --no-watch --include **/services/firestore/tests/**/*.spec.ts --browsers=ChromeHeadless",
