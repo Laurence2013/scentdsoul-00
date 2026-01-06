@@ -10,6 +10,11 @@ import { ScentTypes } from '../../../interfaces/car-air-fresheners.interface';
 
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 
+import { DataService } from '../../services/firestore/data-service';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-add-freshener-form',
   templateUrl: './add-freshener-form.component.html',
@@ -20,6 +25,7 @@ import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
+	private scents00 = inject(DataService);
 
 	public item = new Brands({
 		by_brand: '', 
@@ -30,6 +36,11 @@ export class AddFreshenerFormComponent implements OnInit {
 	public selectedOption = '';
 
   public ngOnInit(){}
+	public getScents(){
+		this.scents00.getScents$().pipe(
+			map(scents01 => scents01)
+		).subscribe(console.log);
+	}
 	public onScentSelect(event: any){
 		console.log('Selected scent: ', event.target.value);
 	}

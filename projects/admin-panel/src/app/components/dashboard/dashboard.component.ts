@@ -32,7 +32,7 @@ import { tap, map, filter, delay, switchMap } from 'rxjs/operators';
 export class DashboardComponent  implements OnInit, OnDestroy {
 
 	private dataService = inject(DataService);
-	private carAirFresheners$ = this.dataService.getCarAirFresheners();
+	private carAirFresheners$ = this.dataService.getCarAirFresheners$();
 	private router = inject(Router);
 	private dialogService = inject(DialogService);
 	private destrofRef = inject(DestroyRef);
