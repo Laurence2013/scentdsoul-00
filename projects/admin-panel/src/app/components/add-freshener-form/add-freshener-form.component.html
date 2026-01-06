@@ -7,8 +7,13 @@
 		<div class="flex flex-col gap-2">
 			<label class="font-bold text-sm">Scent types: </label>
 			<select [(ngModel)]="selectedOption" (change)="onScentSelect($event)">
-				<option></option>
+				@if(option00$ | async; as data){
+					@for(item of data; track item.name){
+					<option [value]="item.name">{{ item.name }}</option>
+					}
+				}
 			</select>
+			<p>Selected: {{ selectedOption }}</p>
 		</div>
 	</section>
 	<div class="flex justify-end gap-2">

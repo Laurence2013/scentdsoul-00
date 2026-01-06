@@ -1,4 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,22 +22,22 @@ import { map, switchMap } from 'rxjs/operators';
   templateUrl: './add-freshener-form.component.html',
   styleUrls: ['./add-freshener-form.component.scss'],
   standalone: true,
-	imports: [ButtonModule, InputTextModule, FormsModule]
+	imports: [CommonModule, ButtonModule, InputTextModule, FormsModule]
 })
 export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
 	private scents00 = inject(DataService);
 
-	public option: Observable<any> = EMPTY;
+	public option00$: Observable<any> = EMPTY;
 	public selectedOption = '';
-	public item = {brand: ''};
+	public item = {brand: ''}; // This is for unit testing
 
   public ngOnInit(){
 		this.getScents();
 	}
 	public getScents(){
-		this.option = this.scents00.getScents$();
+		this.option00$ = this.scents00.getScents$();
 	}
 	public onScentSelect(event: any){
 		console.log('Selected scent: ', event.target.value);
