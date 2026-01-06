@@ -5,19 +5,27 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { AddFreshenerFormComponent } from './add-freshener-form.component';
 
+import { DataService } from '../../services/firestore/data-service';
+
+import { of } from 'rxjs';
+
 describe('AddFreshenerFormComponent', () => {
   let component: AddFreshenerFormComponent;
   let fixture: ComponentFixture<AddFreshenerFormComponent>;
 	let mockDialogRef: jasmine.SpyObj<DynamicDialogRef>;
 
+	const mockDataService = {
+		getScents$: jasmine.createSpy('getScents$').and.returnValue(of([])),
+	};
   beforeEach(waitForAsync(() => {
 		mockDialogRef = jasmine.createSpyObj('DynamicDialogRef', ['close']);
 
     TestBed.configureTestingModule({
       imports: [AddFreshenerFormComponent],
-			providers: [{
-				provide: DynamicDialogRef, useValue: mockDialogRef
-			}]
+			providers: [
+				{provide: DataService, useValue: mockDataService},
+				{provide: DynamicDialogRef, useValue: mockDialogRef}
+			]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AddFreshenerFormComponent);
@@ -44,8 +52,8 @@ describe('AddFreshenerFormComponent', () => {
 
 		tick();
 
-		expect(component.item.by_brand).toBe('California scent');
-		expect(component.item.by_brand).not.toBe('Lavender');
+		expect(component.item.brand).toBe('California scent');
+		expect(component.item.brand).not.toBe('Lavender');
 	}));
 	it('should call close() and dismiss dialog when Cancel button is clicked', () => {
 		const cancelBtn = fixture.debugElement.query(By.css('p-button[label="Cancel"]')).nativeElement;

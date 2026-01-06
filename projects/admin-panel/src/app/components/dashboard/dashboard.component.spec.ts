@@ -12,7 +12,7 @@ describe('DashboardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
 
 	const mockDataService = {
-		getCarAirFresheners: jasmine.createSpy('getCarAirFresheners').and.returnValue(of([])),
+		getCarAirFresheners$: jasmine.createSpy('getCarAirFresheners$').and.returnValue(of([])),
 		addNewCarAirFreshener00: jasmine.createSpy('addNewCarAirFreshener00').and.returnValue(of(null))
 	};
   beforeEach(waitForAsync(() => {

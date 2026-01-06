@@ -27,14 +27,15 @@ export class AddFreshenerFormComponent implements OnInit {
 	private ref = inject(DynamicDialogRef);
 	private scents00 = inject(DataService);
 
-	public options: Observable<any> = EMPTY;
+	public option: Observable<any> = EMPTY;
 	public selectedOption = '';
+	public item = {brand: ''};
 
   public ngOnInit(){
 		this.getScents();
 	}
 	public getScents(){
-		this.options = this.scents00.getScents$();
+		this.option = this.scents00.getScents$();
 	}
 	public onScentSelect(event: any){
 		console.log('Selected scent: ', event.target.value);
