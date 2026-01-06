@@ -6,7 +6,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { Timestamp } from '@angular/fire/firestore';
 
-import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
+import { ScentTypes } from '../../../interfaces/car-air-fresheners.interface';
+
+import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 
 @Component({
   selector: 'app-add-freshener-form',
@@ -19,7 +21,18 @@ export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
 
+	public item = new Brands({
+		by_brand: '', 
+		by_scent: [new Scents({
+			scent_type: 'Cardboard'
+		})]
+	});
+	public selectedOption = '';
+
   public ngOnInit(){}
+	public onScentSelect(event: any){
+		console.log('Selected scent: ', event.target.value);
+	}
 	public save(){
 		this.ref.close();
 	}

@@ -2,15 +2,13 @@
 	<section class="flex flex-col gap-4">
 		<div class="flex flex-col gap-2">
 			<label class="font-bold text-sm">Car Air Freshener name: </label>
-			<!--<input pInputText [(ngModel)]="item.name" placeholder="e.g. Lavender" class="w-full">-->
+			<input pInputText [(ngModel)]="item.by_brand" placeholder="e.g. Lavender" class="w-full">
 		</div>
 		<div class="flex flex-col gap-2">
-			<label class="font-bold text-sm">Other name: </label>
-			<!--<input pInputText [(ngModel)]="item.another_name" placeholder="e.g. Lavenders" class="w-full">-->
-		</div>
-		<div class="flex flex-col gap-2">
-			<label class="font-bold text-sm">Another name: </label>
-			<!--<input pInputText [(ngModel)]="item.other_name" placeholder="e.g. Another name for Lavender" class="w-full">-->
+			<label class="font-bold text-sm">Scent types: </label>
+			<select [(ngModel)]="selectedOption" (change)="onScentSelect($event)">
+				<option></option>
+			</select>
 		</div>
 	</section>
 	<div class="flex justify-end gap-2">
