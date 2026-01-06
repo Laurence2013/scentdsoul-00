@@ -12,8 +12,8 @@ import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 
 import { DataService } from '../../services/firestore/data-service';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, EMPTY } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-freshener-form',
@@ -27,19 +27,14 @@ export class AddFreshenerFormComponent implements OnInit {
 	private ref = inject(DynamicDialogRef);
 	private scents00 = inject(DataService);
 
-	public item = new Brands({
-		by_brand: '', 
-		by_scent: [new Scents({
-			scent_type: 'Cardboard'
-		})]
-	});
+	public options: Observable<any> = EMPTY;
 	public selectedOption = '';
 
-  public ngOnInit(){}
+  public ngOnInit(){
+		this.getScents();
+	}
 	public getScents(){
-		this.scents00.getScents$().pipe(
-			map(scents01 => scents01)
-		).subscribe(console.log);
+		this.options = this.scents00.getScents$();
 	}
 	public onScentSelect(event: any){
 		console.log('Selected scent: ', event.target.value);

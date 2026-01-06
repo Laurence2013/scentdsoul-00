@@ -5,6 +5,7 @@ import { Observable, EMPTY, from, of } from 'rxjs';
 import { map, filter, switchMap } from 'rxjs/operators';
 
 import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
+import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +14,10 @@ export class DataService {
 	private firestore = inject(Firestore);
 	private injector = inject(Injector);
 
-	public getScents$(): Observable<Brand[]>{
+	public getScents$(): Observable<any>{
 		return runInInjectionContext(this.injector, () => {
 			const getCAFs = collection(this.firestore, 'scents')
-			return collectionData(getCAFs, {idField: 'id'}) as Observable<Brand[]>;
+			return collectionData(getCAFs, {idField: 'id'}) as Observable<any>;
 		})
 	};
 	public getCarAirFresheners$(): Observable<any>{
