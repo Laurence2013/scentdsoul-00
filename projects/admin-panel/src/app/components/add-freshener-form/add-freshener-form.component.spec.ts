@@ -15,7 +15,11 @@ describe('AddFreshenerFormComponent', () => {
 	let mockDialogRef: jasmine.SpyObj<DynamicDialogRef>;
 
 	const mockDataService = {
-		getScents$: jasmine.createSpy('getScents$').and.returnValue(of([])),
+		getScents$: jasmine.createSpy('getScents$').and.returnValue(of([
+			{ name: 'Vanilla' },
+			{ name: 'Lavender' },
+			{ name: 'California scent' },
+		])),
 	};
   beforeEach(waitForAsync(() => {
 		mockDialogRef = jasmine.createSpyObj('DynamicDialogRef', ['close']);
@@ -30,6 +34,7 @@ describe('AddFreshenerFormComponent', () => {
 
     fixture = TestBed.createComponent(AddFreshenerFormComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   }));
 
@@ -54,6 +59,29 @@ describe('AddFreshenerFormComponent', () => {
 
 		expect(component.item.brand).toBe('California scent');
 		expect(component.item.brand).not.toBe('Lavender');
+	}));
+	it('should select the second option from the scent types dropdown', fakeAsync(() => {
+		fixture.detectChanges();
+		tick();
+		fixture.detectChanges();
+
+		const selectEl: HTMLSelectElement = fixture.nativeElement.querySelector('select');
+		const options = selectEl.querySelectorAll('option');
+
+		expect(options.length).toBeGreaterThan(1);
+
+		const secondOptionValue = options[1].value;
+		selectEl.value = secondOptionValue;
+
+		selectEl.dispatchEvent(new Event('change'));
+
+		fixture.detectChanges();
+		tick();
+
+		expect(component.selectedOption).toBe(secondOptionValue);
+
+		const debugText = fixture.nativeElement.querySelector('p').textContent;
+		expect(debugText).toContain(`Selected: ${secondOptionValue}`);
 	}));
 	it('should call close() and dismiss dialog when Cancel button is clicked', () => {
 		const cancelBtn = fixture.debugElement.query(By.css('p-button[label="Cancel"]')).nativeElement;
