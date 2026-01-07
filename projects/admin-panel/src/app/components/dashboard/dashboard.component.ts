@@ -66,9 +66,9 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		});
 		if(this.ref){
 			this.ref.onClose.pipe(
-				filter(data00 => !!data00),
-				switchMap((data01: Brand) => this.dataService.addNewCarAirFreshener00(data01)),
-				takeUntilDestroyed(this.destrofRef)
+				//filter(data00 => !!data00),
+				//switchMap((data01: Brand) => this.dataService.addNewCarAirFreshener00(data01)),
+				//takeUntilDestroyed(this.destrofRef)
 			).subscribe(console.log);
 		}else{
 			console.log('Not working at app.component.ts');

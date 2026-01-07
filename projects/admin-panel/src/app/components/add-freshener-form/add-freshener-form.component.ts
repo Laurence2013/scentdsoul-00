@@ -53,10 +53,21 @@ export class AddFreshenerFormComponent implements OnInit {
 		);
 	}
 	public onScentSelect(event: any){
-		console.log('Selected scent: ', event.value);
+		const formData = {
+    brand: this.item.brand,
+    scentName: this.item.scent_name,
+    scentDescription: this.item.scent_description,
+    selectedScent: this.selectedScent,
+    selectedSubScent: this.selectedSubScent,
+    // You can also capture the specific change from the event if needed
+    lastChangedValue: event.value
+  };
+  console.log('Collected Form Data:', formData);
 	}
 	public save(){
-		this.ref.close();
+		const payload = {...this.item, scent: this.selectedScent, subScent: this.selectedSubScent};
+
+		console.log('Sending to API: ', payload);
 	}
 	public close(){
 		this.ref.close();
