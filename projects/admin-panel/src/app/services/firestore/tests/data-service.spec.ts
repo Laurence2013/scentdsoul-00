@@ -65,9 +65,9 @@ describe('DataService', () => {
 			expect(result.by_scent[0].name).not.toBe('Another scent');
 			expect(result.by_scent[0].description).toBe('Some description');
 			expect(result.by_scent[0].scent_type).toBe('Cardboard');
-			expect(result.by_scent[0].price.basePrice).toBe(0.00);
-			expect(result.by_scent[0].price.basePrice).not.toBe(1.99);
-			expect(result.by_scent[0].price.platformPrices).toBeDefined();
+			expect(result.by_scent[0].price?.basePrice).toBe(0.00);
+			expect(result.by_scent[0].price?.basePrice).not.toBe(1.99);
+			expect(result.by_scent[0].price?.platformPrices).toBeDefined();
 
 			expect(result.createdAt instanceof Timestamp).toBe(true);
 			done();
@@ -95,8 +95,8 @@ describe('DataService', () => {
 			expect(result.by_scent[0].name).not.toBe('Some scent');
 			expect(result.by_scent[0].description).toBe('New smell of Corondar Cherry');
 			expect(result.by_scent[0].scent_type).toBe('Tin');
-			expect(result.by_scent[0].price.basePrice).toBe(0.00);
-			expect(result.by_scent[0].price.basePrice).not.toBe(1.99);
+			expect(result.by_scent[0].price?.basePrice).toBe(0.00);
+			expect(result.by_scent[0].price?.basePrice).not.toBe(1.99);
 
 			expect(result.createdAt instanceof Timestamp).toBe(true);
 			done();
@@ -125,8 +125,8 @@ describe('DataService', () => {
 			expect(result.by_scent[0].name).not.toBe('Some scent');
 			expect(result.by_scent[0].description).toBe('New smell of Corondar Cherry');
 			expect(result.by_scent[0].scent_type).toBe('Tin');
-			expect(result.by_scent[0].price.basePrice).toBe(1.99);
-			expect(result.by_scent[0].price.basePrice).not.toBe(0.00);
+			expect(result.by_scent[0].price?.basePrice).toBe(1.99);
+			expect(result.by_scent[0].price?.basePrice).not.toBe(0.00);
 
 			done();
 		});
@@ -149,10 +149,10 @@ describe('DataService', () => {
 			expect(result.by_scent.length).toBeGreaterThan(0);
 			expect(result.by_scent).toBeDefined();
 
-			expect(result.by_scent[0].price.platformPrices[0].listingPrice).toBe(0.00);
-			expect(result.by_scent[0].price.platformPrices[0].listingPrice).not.toBe(1.99);
-			expect(result.by_scent[0].price.platformPrices[0].platform).toBe('Web_Store');
-			expect(result.by_scent[0].price.platformPrices[0].currencyCode).toBe('GBP');
+			expect(result.by_scent[0].price?.platformPrices[0].listingPrice).toBe(0.00);
+			expect(result.by_scent[0].price?.platformPrices[0].listingPrice).not.toBe(1.99);
+			expect(result.by_scent[0].price?.platformPrices[0].platform).toBe('Web_Store');
+			expect(result.by_scent[0].price?.platformPrices[0].currencyCode).toBe('GBP');
 			done();
 		});
 	});
@@ -181,10 +181,10 @@ describe('DataService', () => {
 			expect(result.by_scent).toBeDefined();
 			expect(result.by_scent[0].price).toBeDefined();
 
-			expect(result.by_scent[0].price.platformPrices[0].listingPrice).toBe(1.99);
-			expect(result.by_scent[0].price.platformPrices[0].listingPrice).not.toBe(0.00);
-			expect(result.by_scent[0].price.platformPrices[0].currencyCode).toBe('USD');
-			expect(result.by_scent[0].price.platformPrices[0].currencyCode).not.toBe('GBP');
+			expect(result.by_scent[0].price?.platformPrices[0].listingPrice).toBe(1.99);
+			expect(result.by_scent[0].price?.platformPrices[0].listingPrice).not.toBe(0.00);
+			expect(result.by_scent[0].price?.platformPrices[0].currencyCode).toBe('USD');
+			expect(result.by_scent[0].price?.platformPrices[0].currencyCode).not.toBe('GBP');
 			done();
 		});
 	})

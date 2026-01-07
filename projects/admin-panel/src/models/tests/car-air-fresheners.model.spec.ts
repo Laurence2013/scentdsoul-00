@@ -67,8 +67,8 @@ describe('Car Air Freshener Models', () => {
 			const scent = new Scents({price: priceDefault});
 
 			expect(scent.price instanceof Prices).toBeTrue();
-			expect(scent.price.basePrice).toBe(0.00);
-			expect(scent.price.basePrice).not.toBe(1.99);
+			expect(scent.price?.basePrice).toBe(0.00);
+			expect(scent.price?.basePrice).not.toBe(1.99);
 		});
 	});
 });

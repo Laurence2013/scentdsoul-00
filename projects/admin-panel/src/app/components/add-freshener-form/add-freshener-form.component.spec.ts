@@ -65,23 +65,27 @@ describe('AddFreshenerFormComponent', () => {
 		tick();
 		fixture.detectChanges();
 
-		const selectEl: HTMLSelectElement = fixture.nativeElement.querySelector('select');
-		const options = selectEl.querySelectorAll('option');
+		const scentSelectDebug = fixture.debugElement.query(By.css('p-select'));
 
-		expect(options.length).toBeGreaterThan(1);
+		const scentSelectComponent = scentSelectDebug.componentInstance;
 
-		const secondOptionValue = options[1].value;
-		selectEl.value = secondOptionValue;
+    let options: any[] = [];
+    component.option01$.subscribe(o => options = o);
 
-		selectEl.dispatchEvent(new Event('change'));
+    expect(options.length).toBeGreaterThan(1);
+
+    const secondOption = options[1];
+    scentSelectComponent.updateModel(secondOption.name); // Updates the ngModel
+
+    scentSelectComponent.onChange.emit({ value: secondOption.name });
 
 		fixture.detectChanges();
 		tick();
 
-		expect(component.selectedScent).toBe(secondOptionValue);
+    expect(component.selectedScent).toBe(secondOption.name);
 
-		const debugText = fixture.nativeElement.querySelector('p').textContent;
-		expect(debugText).toContain(`Selected: ${secondOptionValue}`);
+    const debugText = fixture.nativeElement.querySelector('.text-xl').textContent;
+    expect(debugText).toContain(`Selected: ${secondOption.name}`);
 	}));
 	it('should call close() and dismiss dialog when Cancel button is clicked', () => {
 		const cancelBtn = fixture.debugElement.query(By.css('p-button[label="Cancel"]')).nativeElement;
