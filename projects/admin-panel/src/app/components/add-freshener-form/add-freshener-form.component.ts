@@ -32,16 +32,24 @@ export class AddFreshenerFormComponent implements OnInit {
 	private scents00 = inject(DataService);
 
 	public option00$: Observable<any> = EMPTY;
+	public option01$: Observable<any> = EMPTY;
 	public selectedScent = '';
 	public selectedSubScent = '';
-	public item = {brand: '', scent_name: '', scent_description: '', name: '', sub_scent: '', base_price: ''};
+	public item = {brand: '', scent_name: '', scent_description: '', name: '', sub_scent: ''};
 
   public ngOnInit(){
 		this.getScents();
+		this.getSubScents();
 	}
 	public getScents(){
+		this.option01$ = this.scents00.getScents$();
+	}
+	public getSubScents(){
 		this.option00$ = this.scents00.getScents$().pipe(
-			map(items => items.filter((item: any) => item.sub_name && item.sub_name.trim() !==''))
+			map(items => {
+				const filtered = items.filter((item: any) => item.sub_name && item.sub_name.trim() !=='');
+				return [{sub_name: 'Not needed'}, ...filtered];
+			})
 		);
 	}
 	public onScentSelect(event: any){

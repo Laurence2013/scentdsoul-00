@@ -12,7 +12,7 @@
 			<p-card>
 				<label class="font-bold text-sm">Scent types: </label>
 				<p-select 
-					[options]="(option00$ | async) || []" 
+					[options]="(option01$ | async) || []" 
 					[(ngModel)]="selectedScent" 
 					optionLabel="name"
 					optionValue="name"
@@ -43,8 +43,6 @@
 				<p class="py-5 text-sm text-gray-900 text-xl font-medium">Selected: {{ selectedSubScent }}</p>
 			</p-card>
 		</div>
-			<label class="font-bold text-sm">Retail Price: </label>
-			<input pInputText [(ngModel)]="item.base_price" placeholder="e.g. £9.99" class="w-full">
 	</section>
 	<div class="flex justify-end gap-2">
 		<p-button label="Cancel" (click)="close()" severity="secondary" [text]="true"></p-button>

@@ -22,7 +22,7 @@ export class Scents implements Scent {
 	public description = '';
 	public scent_type: ScentTypes = 'Cardboard';
 	public scent_sub_type?: SubScentTypes = 'Hanging';
-	public price: StorePrice = new Prices();
+	public price?: StorePrice = new Prices();
 
 	public constructor(data?: Partial<Scent>){
 		if(data){Object.assign(this, data)}
