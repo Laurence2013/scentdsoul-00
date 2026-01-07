@@ -44,7 +44,7 @@ describe('AddFreshenerFormComponent', () => {
 	it('should render the correct labels', () => {
 		const labels = fixture.nativeElement.querySelectorAll('label');
 		
-		expect(labels[0].textContent).toContain('Car Air Freshener name:');
+		expect(labels[0].textContent).toContain('Brand name:');
 	});
 	it('should type in a brand in the item.by_brand input box', fakeAsync(() => {
 		const inputDebugEl = fixture.debugElement.query(By.css('input[placeholder="e.g. Lavender"]'));
@@ -78,7 +78,7 @@ describe('AddFreshenerFormComponent', () => {
 		fixture.detectChanges();
 		tick();
 
-		expect(component.selectedOption).toBe(secondOptionValue);
+		expect(component.selectedScent).toBe(secondOptionValue);
 
 		const debugText = fixture.nativeElement.querySelector('p').textContent;
 		expect(debugText).toContain(`Selected: ${secondOptionValue}`);

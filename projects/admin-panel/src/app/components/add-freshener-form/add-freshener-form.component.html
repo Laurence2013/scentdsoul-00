@@ -1,19 +1,36 @@
 <div class="flex flex-col gap-6 p-1">
 	<section class="flex flex-col gap-4">
 		<div class="flex flex-col gap-2">
-			<label class="font-bold text-sm">Car Air Freshener name: </label>
+			<label class="font-bold text-sm">Brand name: </label>
 			<input pInputText [(ngModel)]="item.brand" placeholder="e.g. Lavender" class="w-full">
 		</div>
 		<div class="flex flex-col gap-2">
+			<label class="font-bold text-sm">Scent name: </label>
+			<input pInputText [(ngModel)]="item.scent_name" placeholder="e.g. Scent name" class="w-full">
+			<label class="font-bold text-sm">Scent description: </label>
+			<input pInputText [(ngModel)]="item.scent_description" placeholder="e.g. Scent description" class="w-full">
+
 			<label class="font-bold text-sm">Scent types: </label>
-			<select [(ngModel)]="selectedOption" (change)="onScentSelect($event)">
-				@if(option00$ | async; as data){
-					@for(item of data; track item.name){
+			<select [(ngModel)]="selectedScent" (change)="onScentSelect($event)">
+				@if(option00$ | async; as data00){
+					@for(item of data00; track $index){
 					<option [value]="item.name">{{ item.name }}</option>
 					}
 				}
 			</select>
-			<p>Selected: {{ selectedOption }}</p>
+			<p>Selected: {{ selectedScent }}</p>
+			<hr>
+			<label class="font-bold text-sm">Sub scents: </label>
+			<select [(ngModel)]="selectedSubScent" (change)="onScentSelect($event)">
+				@if(option00$ | async; as data01){
+					@for(subName of data01; track $index){
+						@if(subName.sub_name){
+							<option [value]="subName.sub_name">{{ subName.sub_name }}</option>
+						}
+					}
+				}
+			</select>
+			<p>Selected: {{ selectedSubScent }}</p>
 		</div>
 	</section>
 	<div class="flex justify-end gap-2">

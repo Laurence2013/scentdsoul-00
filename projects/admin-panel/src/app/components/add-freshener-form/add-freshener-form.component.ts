@@ -15,7 +15,7 @@ import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 import { DataService } from '../../services/firestore/data-service';
 
 import { Observable, EMPTY } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-freshener-form',
@@ -30,8 +30,9 @@ export class AddFreshenerFormComponent implements OnInit {
 	private scents00 = inject(DataService);
 
 	public option00$: Observable<any> = EMPTY;
-	public selectedOption = '';
-	public item = {brand: ''}; // This is for unit testing
+	public selectedScent = '';
+	public selectedSubScent = '';
+	public item = {brand: '', scent_name: '', scent_description: '', sub_scent: ''};
 
   public ngOnInit(){
 		this.getScents();
