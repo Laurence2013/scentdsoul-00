@@ -11,7 +11,8 @@
 			<input pInputText [(ngModel)]="item.scent_description" placeholder="e.g. Scent description" class="w-full">
 			<p-card>
 				<label class="font-bold text-sm">Scent types: </label>
-				<p-select [options]="(option00$ | async) || []" 
+				<p-select 
+					[options]="(option00$ | async) || []" 
 					[(ngModel)]="selectedScent" 
 					optionLabel="name"
 					optionValue="name"
@@ -19,25 +20,27 @@
           class="w-full"
           styleClass="w-full"
 					(onChange)="onScentSelect($event)">
-					<!--@if(option00$ | async; as data00){
-						@for(item of data00; track $index){
-						<option [value]="item.name">{{ item.name }}</option>
-						}
-						}-->
 				</p-select>
-				<p>Selected: {{ selectedScent }}</p>
+				<p class="py-5 text-sm text-gray-900 text-xl font-medium">Selected: {{ selectedScent }}</p>
 				<hr>
 				<label class="font-bold text-sm">Sub scents: </label>
-				<select [(ngModel)]="selectedSubScent" (change)="onScentSelect($event)">
-					@if(option00$ | async; as data01){
-						@for(subName of data01; track $index){
-							@if(subName.sub_name){
-								<option [value]="subName.sub_name">{{ subName.sub_name }}</option>
-							}
+				<p-select 
+					[(ngModel)]="selectedSubScent" 
+					[options]="(option00$ | async) || []" 
+					[(ngModel)]="selectedSubScent" 
+					optionLabel="sub_name"
+					optionValue="sub_name"
+					placeholder="Select a Sub Scent"
+          class="w-full"
+          styleClass="w-full"
+					(onChange)="onScentSelect($event)">
+					<ng-template pTemplate="item" let-item>
+						@if(item.sub_name){
+						<div>{{ item.sub_name }}</div>
 						}
-					}
-				</select>
-				<p>Selected: {{ selectedSubScent }}</p>
+					</ng-template>
+				</p-select>
+				<p class="py-5 text-sm text-gray-900 text-xl font-medium">Selected: {{ selectedSubScent }}</p>
 			</p-card>
 		</div>
 			<label class="font-bold text-sm">Retail Price: </label>

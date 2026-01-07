@@ -40,7 +40,9 @@ export class AddFreshenerFormComponent implements OnInit {
 		this.getScents();
 	}
 	public getScents(){
-		this.option00$ = this.scents00.getScents$();
+		this.option00$ = this.scents00.getScents$().pipe(
+			map(items => items.filter((item: any) => item.sub_name && item.sub_name.trim() !==''))
+		);
 	}
 	public onScentSelect(event: any){
 		console.log('Selected scent: ', event.value);
