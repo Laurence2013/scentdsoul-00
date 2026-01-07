@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
+import { SelectModule } from 'primeng/select';
 
 import { FormsModule } from '@angular/forms';
 import { Timestamp } from '@angular/fire/firestore';
@@ -22,7 +24,7 @@ import { map, filter } from 'rxjs/operators';
   templateUrl: './add-freshener-form.component.html',
   styleUrls: ['./add-freshener-form.component.scss'],
   standalone: true,
-	imports: [CommonModule, ButtonModule, InputTextModule, FormsModule]
+	imports: [CommonModule, ButtonModule, InputTextModule, FormsModule, CardModule, SelectModule]
 })
 export class AddFreshenerFormComponent implements OnInit {
 
@@ -32,7 +34,7 @@ export class AddFreshenerFormComponent implements OnInit {
 	public option00$: Observable<any> = EMPTY;
 	public selectedScent = '';
 	public selectedSubScent = '';
-	public item = {brand: '', scent_name: '', scent_description: '', sub_scent: ''};
+	public item = {brand: '', scent_name: '', scent_description: '', name: '', sub_scent: '', base_price: ''};
 
   public ngOnInit(){
 		this.getScents();
@@ -41,7 +43,7 @@ export class AddFreshenerFormComponent implements OnInit {
 		this.option00$ = this.scents00.getScents$();
 	}
 	public onScentSelect(event: any){
-		console.log('Selected scent: ', event.target.value);
+		console.log('Selected scent: ', event.value);
 	}
 	public save(){
 		this.ref.close();

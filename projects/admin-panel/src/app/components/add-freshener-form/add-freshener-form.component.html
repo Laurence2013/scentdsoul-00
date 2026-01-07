@@ -9,29 +9,39 @@
 			<input pInputText [(ngModel)]="item.scent_name" placeholder="e.g. Scent name" class="w-full">
 			<label class="font-bold text-sm">Scent description: </label>
 			<input pInputText [(ngModel)]="item.scent_description" placeholder="e.g. Scent description" class="w-full">
-
-			<label class="font-bold text-sm">Scent types: </label>
-			<select [(ngModel)]="selectedScent" (change)="onScentSelect($event)">
-				@if(option00$ | async; as data00){
-					@for(item of data00; track $index){
-					<option [value]="item.name">{{ item.name }}</option>
-					}
-				}
-			</select>
-			<p>Selected: {{ selectedScent }}</p>
-			<hr>
-			<label class="font-bold text-sm">Sub scents: </label>
-			<select [(ngModel)]="selectedSubScent" (change)="onScentSelect($event)">
-				@if(option00$ | async; as data01){
-					@for(subName of data01; track $index){
-						@if(subName.sub_name){
-							<option [value]="subName.sub_name">{{ subName.sub_name }}</option>
+			<p-card>
+				<label class="font-bold text-sm">Scent types: </label>
+				<p-select [options]="(option00$ | async) || []" 
+					[(ngModel)]="selectedScent" 
+					optionLabel="name"
+					optionValue="name"
+					placeholder="Select a Scent Type"
+          class="w-full"
+          styleClass="w-full"
+					(onChange)="onScentSelect($event)">
+					<!--@if(option00$ | async; as data00){
+						@for(item of data00; track $index){
+						<option [value]="item.name">{{ item.name }}</option>
+						}
+						}-->
+				</p-select>
+				<p>Selected: {{ selectedScent }}</p>
+				<hr>
+				<label class="font-bold text-sm">Sub scents: </label>
+				<select [(ngModel)]="selectedSubScent" (change)="onScentSelect($event)">
+					@if(option00$ | async; as data01){
+						@for(subName of data01; track $index){
+							@if(subName.sub_name){
+								<option [value]="subName.sub_name">{{ subName.sub_name }}</option>
+							}
 						}
 					}
-				}
-			</select>
-			<p>Selected: {{ selectedSubScent }}</p>
+				</select>
+				<p>Selected: {{ selectedSubScent }}</p>
+			</p-card>
 		</div>
+			<label class="font-bold text-sm">Retail Price: </label>
+			<input pInputText [(ngModel)]="item.base_price" placeholder="e.g. £9.99" class="w-full">
 	</section>
 	<div class="flex justify-end gap-2">
 		<p-button label="Cancel" (click)="close()" severity="secondary" [text]="true"></p-button>

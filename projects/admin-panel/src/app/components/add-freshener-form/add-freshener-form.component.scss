@@ -1,0 +1,16 @@
+:host ::ng-deep {
+  .p-select {
+    border-radius: 12px;
+    background-color: #f9fafb;
+    border: 2px solid #e5e7eb;
+    
+    &:hover {
+      border-color: #3b82f6;
+    }
+
+    .p-select-label {
+      padding: 12px;
+      color: #374151;
+    }
+  }
+}
