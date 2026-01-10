@@ -27,15 +27,15 @@
 				<p-select 
 					[options]="(option00$ | async) || []" 
 					[(ngModel)]="selectedSubScent" 
-					optionLabel="sub_type"
-					optionValue="sub_type"
+					optionLabel="type"
+					optionValue="type"
 					placeholder="Select a Sub Scent"
           class="w-full"
           styleClass="w-full"
 					>
 					<ng-template pTemplate="item" let-item>
-						@if(item.sub_name){
-						<div>{{ item.sub_name }}</div>
+						@if(item.type){
+						<div>{{ item.type }}</div>
 						}
 					</ng-template>
 				</p-select>
