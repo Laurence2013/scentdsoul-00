@@ -35,7 +35,7 @@ export class AddFreshenerFormComponent implements OnInit {
 	public option01$: Observable<any> = EMPTY;
 	public selectedScent = '';
 	public selectedSubScent = '';
-	public item = {brand: '', scent_name: '', scent_description: '', name: '', sub_scent: ''};
+	public item = {brand: '', scent_name: '', scent_description: ''};
 
   public ngOnInit(){
 		this.getScents();
@@ -52,22 +52,11 @@ export class AddFreshenerFormComponent implements OnInit {
 			})
 		);
 	}
-	public onScentSelect(event: any){
-		const formData = {
-    brand: this.item.brand,
-    scentName: this.item.scent_name,
-    scentDescription: this.item.scent_description,
-    selectedScent: this.selectedScent,
-    selectedSubScent: this.selectedSubScent,
-    // You can also capture the specific change from the event if needed
-    lastChangedValue: event.value
-  };
-  console.log('Collected Form Data:', formData);
-	}
 	public save(){
 		const payload = {...this.item, scent: this.selectedScent, subScent: this.selectedSubScent};
-
-		console.log('Sending to API: ', payload);
+		console.log('add-freshener-form -> save(): ', payload);
+		console.log(payload.brand);
+		console.log(payload instanceof Object);
 	}
 	public close(){
 		this.ref.close();

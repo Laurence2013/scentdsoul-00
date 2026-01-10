@@ -19,7 +19,7 @@
 					placeholder="Select a Scent Type"
           class="w-full"
           styleClass="w-full"
-					(onChange)="onScentSelect($event)">
+					>
 				</p-select>
 				<p class="py-5 text-sm text-gray-900 text-xl font-medium">Selected: {{ selectedScent }}</p>
 				<hr>
@@ -32,7 +32,7 @@
 					placeholder="Select a Sub Scent"
           class="w-full"
           styleClass="w-full"
-					(onChange)="onScentSelect($event)">
+					>
 					<ng-template pTemplate="item" let-item>
 						@if(item.sub_name){
 						<div>{{ item.sub_name }}</div>
