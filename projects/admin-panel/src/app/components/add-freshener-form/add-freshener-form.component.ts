@@ -42,15 +42,14 @@ export class AddFreshenerFormComponent implements OnInit {
 		this.getSubScents();
 	}
 	public getScents(){
-		this.option01$ = this.scents00.getScents$();
+		this.option01$ = this.scents00.getScents00$().pipe(
+			map((payload00: any[]) => payload00
+				.filter(item00 => item00.type && !item00.category)
+				.map(item01 => ({type: item01.type.charAt(0).toUpperCase() + item01.type.slice(1)}))
+			))
 	}
 	public getSubScents(){
-		this.option00$ = this.scents00.getScents$().pipe(
-			map(items => {
-				const filtered = items.filter((item: any) => item.sub_name && item.sub_name.trim() !=='');
-				return [{sub_name: 'Not needed'}, ...filtered];
-			})
-		);
+		this.option00$ = this.scents00.getScents00$().pipe(filter(payload00 => payload00.category));
 	}
 	public save(){
 		const payload = {...this.item, scent: this.selectedScent, subScent: this.selectedSubScent};

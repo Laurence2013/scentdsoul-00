@@ -34,7 +34,7 @@ import { tap, map, filter, delay, switchMap } from 'rxjs/operators';
 export class DashboardComponent  implements OnInit, OnDestroy {
 
 	private dataService = inject(DataService);
-	private carAirFresheners$ = this.dataService.getCarAirFresheners$();
+	private carAirFresheners$ = this.dataService.getCarAirFresheners00$();
 	private router = inject(Router);
 	private dialogService = inject(DialogService);
 	private destrofRef = inject(DestroyRef);
@@ -81,9 +81,9 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 					})
 				}),
 				tap((payload02: Brands) => console.log(payload02 instanceof Brands)),
-				switchMap((payload03: Brands) => this.dataService.addNewCarAirFreshener00(payload03)),
+				switchMap((payload03: Brands) => this.dataService.addNewCarAirFreshener00$(payload03)),
 				takeUntilDestroyed(this.destrofRef)
-			).subscribe(_ => console.log('Has been saved!'));
+			).subscribe(doc => console.log('Has been saved!: ', doc.idDoc));
 		}else{
 			console.log('Not working at app.component.ts');
 		}

@@ -14,8 +14,8 @@
 				<p-select 
 					[options]="(option01$ | async) || []" 
 					[(ngModel)]="selectedScent" 
-					optionLabel="name"
-					optionValue="name"
+					optionLabel="type"
+					optionValue="type"
 					placeholder="Select a Scent Type"
           class="w-full"
           styleClass="w-full"
@@ -27,8 +27,8 @@
 				<p-select 
 					[options]="(option00$ | async) || []" 
 					[(ngModel)]="selectedSubScent" 
-					optionLabel="sub_name"
-					optionValue="sub_name"
+					optionLabel="sub_type"
+					optionValue="sub_type"
 					placeholder="Select a Sub Scent"
           class="w-full"
           styleClass="w-full"

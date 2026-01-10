@@ -14,19 +14,19 @@ export class DataService {
 	private firestore = inject(Firestore);
 	private injector = inject(Injector);
 
-	public getScents$(): Observable<any>{
+	public getScents00$(): Observable<any>{
 		return runInInjectionContext(this.injector, () => {
-			const getCAFs = collection(this.firestore, 'scents')
+			const getCAFs = collection(this.firestore, 'scentTypes');
+
 			return collectionData(getCAFs, {idField: 'id'}) as Observable<any>;
 		})
 	};
-	public getCarAirFresheners$(): Observable<any>{
+	public getCarAirFresheners00$(): Observable<any>{
 		return of({name: 'test'})
 	};
-	public addNewCarAirFreshener00(payload00: Brands): Observable<any> {
+	public addNewCarAirFreshener00$(payload00: Brands): Observable<any> {
 		return runInInjectionContext(this.injector, () => {
-			const cafCollection00 = collection(this.firestore, 'scents');
-
+			const cafCollection00 = collection(this.firestore, 'brands');
 			const plainData = payload00.toPlainObj()
 
 			return from(addDoc(cafCollection00, plainData)).pipe(map((docRef) => { return {idDoc: docRef.id}}))
