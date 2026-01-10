@@ -23,12 +23,13 @@ export class DataService {
 	public getCarAirFresheners$(): Observable<any>{
 		return of({name: 'test'})
 	};
-	public addNewCarAirFreshener00(item00: Brand): Observable<Brand> {
+	public addNewCarAirFreshener00(payload00: Brands): Observable<any> {
 		return runInInjectionContext(this.injector, () => {
-			const cafCollection00 = collection(this.firestore, 'car-air-fresheners');
+			const cafCollection00 = collection(this.firestore, 'scents');
 
-			return from(addDoc(cafCollection00, item00)).pipe(
-				map((docRef) => { return {...item00, id: docRef.id} as Brand }))
+			const plainData = payload00.toPlainObj()
+
+			return from(addDoc(cafCollection00, plainData)).pipe(map((docRef) => { return {idDoc: docRef.id}}))
 		});
 	}
 }

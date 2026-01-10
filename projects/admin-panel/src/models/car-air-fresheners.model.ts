@@ -14,6 +14,20 @@ export class Brands implements Brand {
 	public constructor(data?: Partial<Brand>){
 		if(data){Object.assign(this, data)}
 	}
+	public toPlainObj(){
+		return {
+			id: this.brandId,
+			by_brand: this.by_brand,
+			createdAt: this.createdAt,
+			by_scent: this.by_scent.map(s => ({
+				name: s.name,
+				description: s.description,
+				scent_type: s.scent_type,
+				scent_sub_type: s.scent_sub_type || 'Hanging'
+			})),
+			price: ''
+		}
+	}
 }
 export class Scents implements Scent {
 
