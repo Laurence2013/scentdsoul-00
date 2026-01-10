@@ -70,16 +70,18 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 			this.ref.onClose.pipe(
 				tap(payload00 => console.log('dashboard -> addNewItem(): ', payload00)),
 				map(payload01 => {
-					const newScent00 = new Brands({
+					return new Brands({
 						by_brand: payload01.brand,
 						by_scent: [new Scents({
-							name: payload01.scent_name
+							name: payload01.scent_name,
+							description: payload01.scent_description,
+							scent_type: payload01.scent.split(' ').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+							scent_sub_type: payload01.subScent.split(' ').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
 						})]
 					})
-					console.log(newScent00);
-					console.log(newScent00 instanceof Brands);
-					return EMPTY;
 				}),
+				tap((payload02: Brands) => console.log(payload02 instanceof Brands)),
+				tap(console.log),
 				//switchMap((data02: Brand) => this.dataService.addNewCarAirFreshener00(data02)),
 				takeUntilDestroyed(this.destrofRef)
 			).subscribe();
