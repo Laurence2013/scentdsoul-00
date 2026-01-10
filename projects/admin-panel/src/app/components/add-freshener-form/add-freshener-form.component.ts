@@ -55,8 +55,8 @@ export class AddFreshenerFormComponent implements OnInit {
 	public save(){
 		const payload = {...this.item, scent: this.selectedScent, subScent: this.selectedSubScent};
 		console.log('add-freshener-form -> save(): ', payload);
-		console.log(payload.brand);
-		console.log(payload instanceof Object);
+
+		this.ref.close(payload);
 	}
 	public close(){
 		this.ref.close();

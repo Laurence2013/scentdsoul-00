@@ -17,6 +17,8 @@ import { environment } from '../../../environments/environment';
 
 import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
 
+import { Brands, Scents } from '../../../models/car-air-fresheners.model';
+
 import { AddFreshenerFormComponent } from '../add-freshener-form/add-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
@@ -66,9 +68,20 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		});
 		if(this.ref){
 			this.ref.onClose.pipe(
-				tap(data00 => console.log('dashboard -> addNewItem(): ', data00))
-				//switchMap((data01: Brand) => this.dataService.addNewCarAirFreshener00(data01)),
-				//takeUntilDestroyed(this.destrofRef)
+				tap(payload00 => console.log('dashboard -> addNewItem(): ', payload00)),
+				map(payload01 => {
+					const newScent00 = new Brands({
+						by_brand: payload01.brand,
+						by_scent: [new Scents({
+							name: payload01.scent_name
+						})]
+					})
+					console.log(newScent00);
+					console.log(newScent00 instanceof Brands);
+					return EMPTY;
+				}),
+				//switchMap((data02: Brand) => this.dataService.addNewCarAirFreshener00(data02)),
+				takeUntilDestroyed(this.destrofRef)
 			).subscribe();
 		}else{
 			console.log('Not working at app.component.ts');
