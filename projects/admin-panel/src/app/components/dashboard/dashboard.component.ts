@@ -52,7 +52,7 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		this.router.navigate(['/']);
 	}
 	public car_air_fresheners(){
-		this.caf00$ = this.carAirFresheners$.pipe(delay(2000));
+		this.caf00$ = this.carAirFresheners$.pipe(delay(1000));
 	}
 	public addNewItem(){
 		this.ref = this.dialogService.open(AddFreshenerFormComponent, {
@@ -66,10 +66,10 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		});
 		if(this.ref){
 			this.ref.onClose.pipe(
-				//filter(data00 => !!data00),
+				tap(data00 => console.log('dashboard -> addNewItem(): ', data00))
 				//switchMap((data01: Brand) => this.dataService.addNewCarAirFreshener00(data01)),
 				//takeUntilDestroyed(this.destrofRef)
-			).subscribe(console.log);
+			).subscribe();
 		}else{
 			console.log('Not working at app.component.ts');
 		}
