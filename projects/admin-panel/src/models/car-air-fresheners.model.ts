@@ -7,7 +7,7 @@ import { Prices } from './prices.model';
 export class Brands implements Brand {
 
 	public brandId = crypto.randomUUID();
-	public by_brand = '';
+	public brand = '';
 	public by_scent: Scent[] = [new Scents()];
 	public createdAt = Timestamp.now();
 
@@ -17,7 +17,7 @@ export class Brands implements Brand {
 	public toPlainObj(){
 		return {
 			id: this.brandId,
-			by_brand: this.by_brand,
+			brand: this.brand,
 			createdAt: this.createdAt,
 			by_scent: this.by_scent.map(s => ({
 				name: s.name,

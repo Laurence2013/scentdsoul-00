@@ -7,7 +7,7 @@ export type SubScentTypes = 'Not Needed' | 'Hanging' | 'Stick' |'Electric Diffus
 
 export interface Brand {
 	brandId: string;
-	by_brand: string;
+	brand: string;
 	by_scent: Scent[];
 	createdAt: Timestamp;
 }

@@ -18,16 +18,16 @@ describe('Car Air Freshener Models', () => {
 
 			expect(brand).toBeTruthy();
 			expect(brand.brandId).toBeDefined();
-			expect(brand.by_brand).toBe('');
+			expect(brand.brand).toBe('');
 			expect(brand.by_scent.length).toBe(1);
 			expect(brand.by_scent[0] instanceof Scents).toBeTrue();
 			expect(brand.createdAt instanceof Timestamp).toBeTrue();
 		});
 		it('should accept partial data in the constructor', () => {
 			const customName = 'California scents';
-			const brand = new Brands({by_brand: customName});
+			const brand = new Brands({brand: customName});
 
-			expect(brand.by_brand).toBe(customName);
+			expect(brand.brand).toBe(customName);
 			expect(brand.brandId).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
 		});
 		it('should overwrite default scent array if provided', () => {
@@ -39,10 +39,10 @@ describe('Car Air Freshener Models', () => {
 		});
 		it('should create a full brand hierarchy', () => {
 			const brand = new Brands({
-				by_brand: 'California scent',
+				brand: 'California scent',
 				by_scent: [new Scents({name: 'Cherry', scent_type: 'Bag'})]
 			});
-			expect(brand.by_brand).toBe('California scent');
+			expect(brand.brand).toBe('California scent');
 			expect(brand.by_scent[0].name).toBe('Cherry');
 			expect(brand.by_scent[0].scent_type).toBe('Bag');
 		});

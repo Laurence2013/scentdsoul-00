@@ -71,7 +71,7 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 				tap(payload00 => console.log('dashboard -> addNewItem(): ', payload00)),
 				map(payload01 => {
 					return new Brands({
-						by_brand: payload01.brand,
+						brand: payload01.brand,
 						by_scent: [new Scents({
 							name: payload01.scent_name,
 							description: payload01.scent_description,
