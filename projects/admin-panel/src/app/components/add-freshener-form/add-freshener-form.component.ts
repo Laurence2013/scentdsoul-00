@@ -7,7 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Timestamp } from '@angular/fire/firestore';
 
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
@@ -22,7 +22,9 @@ import { map, filter } from 'rxjs/operators';
   templateUrl: './add-freshener-form.component.html',
   styleUrls: ['./add-freshener-form.component.scss'],
   standalone: true,
-	imports: [CommonModule, ButtonModule, InputTextModule, FormsModule, CardModule, SelectModule]
+	imports: [CommonModule, ButtonModule, InputTextModule, CardModule, SelectModule,
+		FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators
+	]
 })
 export class AddFreshenerFormComponent implements OnInit {
 
