@@ -10,8 +10,6 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { Timestamp } from '@angular/fire/firestore';
 
-import { ScentTypes } from '../../../interfaces/car-air-fresheners.interface';
-
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 
 import { DataService } from '../../services/firestore/data-service';
