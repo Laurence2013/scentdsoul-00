@@ -1,0 +1,28 @@
+<div class="flex flex-col gap-6 p-1">
+  <section class="flex flex-col gap-4">
+    
+    <div class="flex flex-col gap-2">
+      <label class="font-bold text-sm">Brand name: <span class="text-red-500">*</span></label>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="font-bold text-sm">Scent name: <span class="text-red-500">*</span></label>
+      <label class="font-bold text-sm">Scent description: <span class="text-red-500">*</span></label>
+
+      <p-card>
+        <label class="font-bold text-sm">Scent types: <span class="text-red-500">*</span></label>
+				<p-select></p-select>
+
+        <hr class="my-4">
+
+        <label class="font-bold text-sm">Sub scents: <span class="text-red-500">*</span></label>
+				<p-select></p-select>
+      </p-card>
+    </div>
+  </section>
+
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancel" (click)="close()" severity="secondary" [text]="true"></p-button>
+    <p-button label="Save" (click)="save()"></p-button>
+  </div>
+</div>

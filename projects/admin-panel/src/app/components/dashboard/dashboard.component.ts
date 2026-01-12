@@ -16,6 +16,7 @@ import { environment } from '../../../environments/environment';
 import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 import { AddFreshenerFormComponent } from '../add-freshener-form/add-freshener-form.component';
+import { EditFreshenerFormComponent } from '../edit-freshener-form/edit-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
 import { tap, map, filter, delay, switchMap } from 'rxjs/operators';
@@ -34,6 +35,7 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 	private dialogService = inject(DialogService);
 	private destrofRef = inject(DestroyRef);
 	private ref: DynamicDialogRef<AddFreshenerFormComponent> | null = null;
+	private ref00: DynamicDialogRef<EditFreshenerFormComponent> | null = null;
 
 	public sidebarVisible = false;
 	public caf00$: Observable<Brand[]> = EMPTY;
@@ -51,8 +53,7 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 	public car_air_fresheners(){
 		this.caf00$ = this.dataService.getCarAirFresheners00$().pipe(
 			tap(brand00 => console.log('dashboard => car_air_fresheners(): ', brand00)),
-			delay(1000),
-			takeUntilDestroyed(this.destrofRef)
+			delay(1000)
 		);
 	}
 	public addNewItem(){
@@ -89,7 +90,15 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		}
 	}
 	public editItem(item: any){
-		console.log(item);
+		this.ref00 = this.dialogService.open(EditFreshenerFormComponent, {
+			header: 'Edit Car Air Freshener',
+			width: '600px',
+			modal: true,
+			breakpoints: {
+				'960px': '75vw',
+				'640px': '90vw'
+			}
+		});
 	}
 	public deleteItem(name: string){
 		console.log('Deleting item with ID:', name);

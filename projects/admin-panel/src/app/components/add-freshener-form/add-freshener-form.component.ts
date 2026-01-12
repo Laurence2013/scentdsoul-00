@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Timestamp } from '@angular/fire/firestore';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
@@ -13,7 +14,7 @@ import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 import { DataService } from '../../services/firestore/data-service';
 
 import { Observable, EMPTY } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-freshener-form',
@@ -25,7 +26,7 @@ import { map, filter } from 'rxjs/operators';
 export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
-	private scents00 = inject(DataService);
+	private dataService = inject(DataService);
 	private fb = inject(FormBuilder);
 
 	public option00$: Observable<any> = EMPTY;
@@ -33,9 +34,11 @@ export class AddFreshenerFormComponent implements OnInit {
 	public freshenerForm!: FormGroup;
 
   public ngOnInit(){
+		const rawScent$ = this.dataService.getScentTypes00$().pipe(shareReplay(1));
+
 		this.initForm();
-		this.getScents();
-		this.getSubScents();
+		this.getScents(rawScent$);
+		this.getSubScents(rawScent$);
 	}
 	private initForm() {
     this.freshenerForm = this.fb.group({
@@ -46,15 +49,15 @@ export class AddFreshenerFormComponent implements OnInit {
       sub_scent: ['', Validators.required]
     });
   }
-	public getScents(){
-		this.option01$ = this.scents00.getScentTypes00$().pipe(
+	public getScents(source$: Observable<any[]>){
+		this.option01$ = source$.pipe(
 			map((payload00: any[]) => payload00
 				.filter(item00 => item00.type && !item00.category)
 				.map(item01 => ({type: item01.type.charAt(0).toUpperCase() + item01.type.slice(1)}))
 			))
 	}
-	public getSubScents(){
-		this.option00$ = this.scents00.getScentTypes00$().pipe(
+	public getSubScents(source$: Observable<any[]>){
+		this.option00$ = source$.pipe(
 			map((payload00: any[]) => payload00
 				.filter(item00 => item00.type && item00.category)
 				.map(item01 => ({type: item01.type.charAt(0).toUpperCase() + item01.type.slice(1)}))
