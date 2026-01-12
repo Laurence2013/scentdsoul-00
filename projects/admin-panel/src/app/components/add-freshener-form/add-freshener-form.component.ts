@@ -1,5 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Timestamp } from '@angular/fire/firestore';
 
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
@@ -7,11 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
 
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Timestamp } from '@angular/fire/firestore';
-
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
-
 import { DataService } from '../../services/firestore/data-service';
 
 import { Observable, EMPTY } from 'rxjs';
@@ -22,25 +20,32 @@ import { map, filter } from 'rxjs/operators';
   templateUrl: './add-freshener-form.component.html',
   styleUrls: ['./add-freshener-form.component.scss'],
   standalone: true,
-	imports: [CommonModule, ButtonModule, InputTextModule, CardModule, SelectModule,
-		FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators
-	]
+	imports: [CommonModule, ButtonModule, InputTextModule, CardModule, SelectModule, FormsModule, ReactiveFormsModule]
 })
 export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
 	private scents00 = inject(DataService);
+	private fb = inject(FormBuilder);
 
 	public option00$: Observable<any> = EMPTY;
 	public option01$: Observable<any> = EMPTY;
-	public selectedScent = '';
-	public selectedSubScent = '';
-	public item = {brand: '', scent_name: '', scent_description: ''};
+	public freshenerForm!: FormGroup;
 
   public ngOnInit(){
+		this.initForm();
 		this.getScents();
 		this.getSubScents();
 	}
+	private initForm() {
+    this.freshenerForm = this.fb.group({
+      brand: ['', Validators.required],
+      scent_name: ['', Validators.required],
+      scent_description: ['', Validators.required],
+      scent_type: ['', Validators.required],
+      sub_scent: ['', Validators.required]
+    });
+  }
 	public getScents(){
 		this.option01$ = this.scents00.getScents00$().pipe(
 			map((payload00: any[]) => payload00
@@ -56,7 +61,13 @@ export class AddFreshenerFormComponent implements OnInit {
 		))
 	}
 	public save(){
-		const payload = {...this.item, scent: this.selectedScent, subScent: this.selectedSubScent};
+		const payload = {
+			brand: this.freshenerForm.value.brand ?? '',
+			scent_name: this.freshenerForm.value.scent_name ?? '',
+			scent_description: this.freshenerForm.value.scent_description ?? '',
+			scent: this.freshenerForm.value.scent_type ?? '',
+			subScent: this.freshenerForm.value.sub_scent ?? ''
+    };
 		console.log('add-freshener-form -> save(): ', payload);
 
 		this.ref.close(payload);

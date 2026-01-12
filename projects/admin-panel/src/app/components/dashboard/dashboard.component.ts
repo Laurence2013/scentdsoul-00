@@ -68,7 +68,6 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		});
 		if(this.ref){
 			this.ref.onClose.pipe(
-				filter(payload04 => payload04 !== undefined),
 				tap(payload00 => console.log('dashboard -> addNewItem(): ', payload00)),
 				map(payload01 => {
 					return new Brands({
@@ -76,8 +75,8 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 						by_scent: [new Scents({
 							name: payload01.scent_name,
 							description: payload01.scent_description,
-							scent_type: payload01.scent.split(' ').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
-							scent_sub_type: payload01.subScent.split(' ').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+							scent_type: payload01.scent,
+							scent_sub_type: payload01.subScent
 						})]
 					})
 				}),

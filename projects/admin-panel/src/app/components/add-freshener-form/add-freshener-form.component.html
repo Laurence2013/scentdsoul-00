@@ -1,50 +1,48 @@
-<div class="flex flex-col gap-6 p-1">
-	<section class="flex flex-col gap-4">
-		<div class="flex flex-col gap-2">
-			<label class="font-bold text-sm">Brand name: </label>
-			<input pInputText [(ngModel)]="item.brand" placeholder="e.g. Lavender" class="w-full">
-		</div>
-		<div class="flex flex-col gap-2">
-			<label class="font-bold text-sm">Scent name: </label>
-			<input pInputText [(ngModel)]="item.scent_name" placeholder="e.g. Scent name" class="w-full">
-			<label class="font-bold text-sm">Scent description: </label>
-			<input pInputText [(ngModel)]="item.scent_description" placeholder="e.g. Scent description" class="w-full">
-			<p-card>
-				<label class="font-bold text-sm">Scent types: </label>
-				<p-select 
-					[options]="(option01$ | async) || []" 
-					[(ngModel)]="selectedScent" 
-					optionLabel="type"
-					optionValue="type"
-					placeholder="Select a Scent Type"
+<div class="flex flex-col gap-6 p-1" [formGroup]="freshenerForm">
+  <section class="flex flex-col gap-4">
+    
+    <div class="flex flex-col gap-2">
+      <label class="font-bold text-sm">Brand name: <span class="text-red-500">*</span></label>
+      <input pInputText formControlName="brand" placeholder="e.g. Lavender" class="w-full">
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="font-bold text-sm">Scent name: <span class="text-red-500">*</span></label>
+      <input pInputText formControlName="scent_name" placeholder="e.g. Scent name" class="w-full">
+      
+      <label class="font-bold text-sm">Scent description: <span class="text-red-500">*</span></label>
+      <input pInputText formControlName="scent_description" placeholder="e.g. Scent description" class="w-full">
+
+      <p-card>
+        <label class="font-bold text-sm">Scent types: <span class="text-red-500">*</span></label>
+        <p-select 
+          [options]="(option01$ | async) || []" 
+          formControlName="scent_type" 
+          optionLabel="type"
+          optionValue="type"
+          placeholder="Select a Scent Type"
           class="w-full"
-          styleClass="w-full"
-					>
-				</p-select>
-				<p class="py-5 text-sm text-gray-900 text-xl font-medium">Selected: {{ selectedScent }}</p>
-				<hr>
-				<label class="font-bold text-sm">Sub scents: </label>
-				<p-select 
-					[options]="(option00$ | async) || []" 
-					[(ngModel)]="selectedSubScent" 
-					optionLabel="type"
-					optionValue="type"
-					placeholder="Select a Sub Scent"
+          styleClass="w-full">
+        </p-select>
+
+        <hr class="my-4">
+
+        <label class="font-bold text-sm">Sub scents: <span class="text-red-500">*</span></label>
+        <p-select 
+          [options]="(option00$ | async) || []" 
+          formControlName="sub_scent" 
+          optionLabel="type"
+          optionValue="type"
+          placeholder="Select a Sub Scent"
           class="w-full"
-          styleClass="w-full"
-					>
-					<ng-template pTemplate="item" let-item>
-						@if(item.type){
-						<div>{{ item.type }}</div>
-						}
-					</ng-template>
-				</p-select>
-				<p class="py-5 text-sm text-gray-900 text-xl font-medium">Selected: {{ selectedSubScent }}</p>
-			</p-card>
-		</div>
-	</section>
-	<div class="flex justify-end gap-2">
-		<p-button label="Cancel" (click)="close()" severity="secondary" [text]="true"></p-button>
-		<p-button label="Save" (click)="save()"></p-button>
-	</div>
+          styleClass="w-full">
+        </p-select>
+      </p-card>
+    </div>
+  </section>
+
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancel" (click)="close()" severity="secondary" [text]="true"></p-button>
+    <p-button label="Save" (click)="save()" [disabled]="freshenerForm.invalid"></p-button>
+  </div>
 </div>

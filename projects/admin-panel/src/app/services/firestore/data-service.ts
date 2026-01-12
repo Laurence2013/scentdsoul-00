@@ -25,6 +25,7 @@ export class DataService {
 		return of({name: 'test'})
 	};
 	public addNewCarAirFreshener00$(payload00: Brands): Observable<any> {
+		console.log(payload00);
 		return runInInjectionContext(this.injector, () => {
 			const cafCollection00 = collection(this.firestore, 'brands');
 			const plainData = payload00.toPlainObj()
