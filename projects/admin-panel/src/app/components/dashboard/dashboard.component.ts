@@ -19,7 +19,7 @@ import { AddFreshenerFormComponent } from '../add-freshener-form/add-freshener-f
 import { EditFreshenerFormComponent } from '../edit-freshener-form/edit-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
-import { tap, map, filter, delay, switchMap } from 'rxjs/operators';
+import { tap, map, filter, delay, switchMap, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -53,7 +53,8 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 	public car_air_fresheners(){
 		this.caf00$ = this.dataService.getCarAirFresheners00$().pipe(
 			tap(brand00 => console.log('dashboard => car_air_fresheners(): ', brand00)),
-			delay(1000)
+			delay(1000),
+			shareReplay(1)
 		);
 	}
 	public addNewItem(){
@@ -61,10 +62,7 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 			header: 'Add New Car Air Freshener',
 			width: '600px',
 			modal: true,
-			breakpoints: {
-				'960px': '75vw',
-				'640px': '90vw'
-			}
+			breakpoints: {'960px': '75vw','640px': '90vw'}
 		});
 		if(this.ref){
 			this.ref.onClose.pipe(
@@ -84,20 +82,22 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 				tap((payload02: Brands) => console.log(payload02 instanceof Brands)),
 				switchMap((payload03: Brands) => this.dataService.addNewCarAirFreshener00$(payload03)),
 				takeUntilDestroyed(this.destrofRef)
-			).subscribe(doc => console.log('Has been saved!: ', doc.idDoc));
+			).subscribe(doc => {
+				console.log('Has been saved!: ', doc.idDoc);
+				this.car_air_fresheners();
+			});
 		}else{
 			console.log('Not working at app.component.ts');
 		}
 	}
 	public editItem(item: any){
+		console.log('dashboard -> editItem(): ',item);
 		this.ref00 = this.dialogService.open(EditFreshenerFormComponent, {
 			header: 'Edit Car Air Freshener',
 			width: '600px',
 			modal: true,
-			breakpoints: {
-				'960px': '75vw',
-				'640px': '90vw'
-			}
+			breakpoints: {'960px': '75vw','640px': '90vw'},
+			data: {payload: item}
 		});
 	}
 	public deleteItem(name: string){
