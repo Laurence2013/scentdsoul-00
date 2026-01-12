@@ -67,6 +67,7 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		});
 		if(this.ref){
 			this.ref.onClose.pipe(
+				filter(payload => !!payload),
 				tap(payload00 => console.log('dashboard -> addNewItem(): ', payload00)),
 				map(payload01 => {
 					return new Brands({
