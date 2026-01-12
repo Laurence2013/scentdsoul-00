@@ -12,13 +12,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { DataService } from '../../services/firestore/data-service';
-
 import { environment } from '../../../environments/environment';
-
 import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
-
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
-
 import { AddFreshenerFormComponent } from '../add-freshener-form/add-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
@@ -34,7 +30,6 @@ import { tap, map, filter, delay, switchMap } from 'rxjs/operators';
 export class DashboardComponent  implements OnInit, OnDestroy {
 
 	private dataService = inject(DataService);
-	private carAirFresheners$ = this.dataService.getCarAirFresheners00$();
 	private router = inject(Router);
 	private dialogService = inject(DialogService);
 	private destrofRef = inject(DestroyRef);
@@ -54,7 +49,11 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		this.router.navigate(['/']);
 	}
 	public car_air_fresheners(){
-		this.caf00$ = this.carAirFresheners$.pipe(delay(1000));
+		this.caf00$ = this.dataService.getCarAirFresheners00$().pipe(
+			tap(brand00 => console.log('dashboard => car_air_fresheners(): ', brand00)),
+			delay(1000),
+			takeUntilDestroyed(this.destrofRef)
+		);
 	}
 	public addNewItem(){
 		this.ref = this.dialogService.open(AddFreshenerFormComponent, {

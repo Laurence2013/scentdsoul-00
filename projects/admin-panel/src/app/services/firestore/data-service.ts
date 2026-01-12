@@ -14,7 +14,7 @@ export class DataService {
 	private firestore = inject(Firestore);
 	private injector = inject(Injector);
 
-	public getScents00$(): Observable<any>{
+	public getScentTypes00$(): Observable<any>{
 		return runInInjectionContext(this.injector, () => {
 			const getCAFs = collection(this.firestore, 'scentTypes');
 
@@ -22,7 +22,11 @@ export class DataService {
 		})
 	};
 	public getCarAirFresheners00$(): Observable<any>{
-		return of({name: 'test'})
+		return runInInjectionContext(this.injector, () => {
+			const getCAFs = collection(this.firestore, 'brands');
+
+			return collectionData(getCAFs, {idField: 'id'}) as Observable<any>;
+		});
 	};
 	public addNewCarAirFreshener00$(payload00: Brands): Observable<any> {
 		console.log(payload00);
