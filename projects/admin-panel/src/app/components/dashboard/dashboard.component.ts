@@ -93,7 +93,6 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		}
 	}
 	public editItem(item: any){
-		console.log('dashboard -> editItem(): ',item);
 		this.ref00 = this.dialogService.open(EditFreshenerFormComponent, {
 			header: 'Edit Car Air Freshener',
 			width: '700px',
@@ -101,6 +100,14 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 			breakpoints: {'960px': '75vw','640px': '90vw'},
 			data: {payload: item}
 		});
+		if(this.ref00){
+			this.ref00.onClose.pipe(
+				filter(payload => !!payload),
+				tap(payload00 => console.log('dashboard -> editItem(): ', payload00)),
+			).subscribe();
+		}else{
+			console.log('Not working at editItem()');
+		}
 	}
 	public deleteItem(name: string){
 		console.log('Deleting item with ID:', name);
