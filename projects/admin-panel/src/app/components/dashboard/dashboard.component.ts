@@ -61,7 +61,7 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 	public addNewItem(){
 		this.ref = this.dialogService.open(AddFreshenerFormComponent, {
 			header: 'Add New Car Air Freshener',
-			width: '600px',
+			width: '700px',
 			modal: true,
 			breakpoints: {'960px': '75vw','640px': '90vw'}
 		});
@@ -96,7 +96,7 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		console.log('dashboard -> editItem(): ',item);
 		this.ref00 = this.dialogService.open(EditFreshenerFormComponent, {
 			header: 'Edit Car Air Freshener',
-			width: '600px',
+			width: '700px',
 			modal: true,
 			breakpoints: {'960px': '75vw','640px': '90vw'},
 			data: {payload: item}

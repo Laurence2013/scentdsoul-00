@@ -71,7 +71,7 @@ export class EditFreshenerFormComponent implements OnInit {
     };
 		console.log('add-freshener-form -> save(): ', payload);
 
-		//this.ref.close(payload);
+		this.ref.close(payload);
 	}
 	public close(){
 		this.ref.close();
