@@ -1,37 +1,85 @@
-<form [formGroup]="payload02" class="p-4">
-  <p-fluid class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<form [formGroup]="payload02" (ngSubmit)="save()" *ngIf="payload02" class="p-4">
+  <p-fluid class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+    
     <div class="col-span-1 md:col-span-2 flex flex-col gap-2">
       <label for="brand" class="font-semibold text-slate-700">Brand Name</label>
-			<input pInputText id="brand" formControlName="brand" placeholder="e.g. Little Trees"/>
+      <input 
+        pInputText 
+        id="brand" 
+        formControlName="brand" 
+        placeholder="e.g. Little Trees" 
+        class="w-full"
+      />
     </div>
-    <div class="flex flex-col gap-2">
-      <label for="scent_name" class="font-semibold text-slate-700">Scent Name</label>
-      <input pInputText id="scent" formControlName="scent" />
-    </div>
-    <div class="flex flex-col gap-2">
-      <label for="scent_type" class="font-semibold text-slate-700">Scent Type</label>
-      <p-select 
-        id="scent_type" 
-				[options]="(option00$ | async) || []" 
-				formControlName="type_of_scent" 
-				optionLabel="type"
-				optionValue="type"
-        placeholder="Select Type">
 
-				<ng-template pTemplate="item" let-item>{{ item.type | titlecase }}</ng-template>
-				<ng-template pTemplate="selectedItem" let-selectedOption>{{ selectedOption.type | titlecase }}</ng-template>
-      </p-select>
+    <div class="flex flex-col gap-2">
+      <label for="scent" class="font-semibold text-slate-700">Scent Name</label>
+      <input 
+        pInputText 
+        id="scent" 
+        formControlName="scent" 
+        placeholder="e.g. Black Ice" 
+        class="w-full"
+      />
+      <small class="text-slate-400 italic">Enter the specific fragrance name.</small>
     </div>
+
+    <fieldset class="border border-slate-200 bg-slate-50/50 p-4 rounded-xl shadow-sm">
+      <legend class="px-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+        Classification
+      </legend>
+      
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+          <label for="scent_type" class="text-sm font-semibold text-slate-600">Primary Type</label>
+          <p-select 
+            id="scent_type" 
+            [options]="(option00$ | async) || []" 
+            formControlName="type_of_scent" 
+            optionLabel="type"
+            optionValue="type"
+            placeholder="Select Type">
+            <ng-template pTemplate="item" let-item>
+              {{ item.type | titlecase }}
+            </ng-template>
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              {{ selectedOption.type | titlecase }}
+            </ng-template>
+          </p-select>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="sub_type" class="text-sm font-semibold text-slate-600">Sub-Category</label>
+          <p-select 
+            id="sub_type" 
+            [options]="(option01$ | async) || []" 
+            formControlName="scent_sub_type" 
+            optionLabel="type"
+            optionValue="type"
+            placeholder="Select Sub-Type">
+            <ng-template pTemplate="item" let-item>
+              {{ item.type | titlecase }}
+            </ng-template>
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              {{ selectedOption.type | titlecase }}
+            </ng-template>
+          </p-select>
+        </div>
+      </div>
+    </fieldset>
+
     <div class="col-span-1 md:col-span-2 flex flex-col gap-2">
       <label for="description" class="font-semibold text-slate-700">Description</label>
       <textarea 
         pTextarea 
         id="description" 
-				formControlName="description" 
+        formControlName="description" 
         rows="3" 
-        [autoResize]="true">
+        [autoResize]="true"
+        placeholder="Add details about this freshener...">
       </textarea>
     </div>
+
     <div class="col-span-1 md:col-span-2 flex justify-end gap-3 mt-4">
       <p-button 
         label="Cancel" 
@@ -43,8 +91,9 @@
         label="Save Changes" 
         icon="pi pi-check" 
         type="submit" 
-        >
+        [disabled]="payload02.invalid">
       </p-button>
     </div>
+
   </p-fluid>
 </form>
