@@ -12,8 +12,10 @@
       <label for="scent_type" class="font-semibold text-slate-700">Scent Type</label>
       <p-select 
         id="scent_type" 
-        formControlName="scent_type" 
-        [options]="['Fruity', 'Woody', 'Fresh', 'Floral']" 
+				[options]="(option00$ | async) || []" 
+				formControlName="type_of_scent" 
+				optionLabel="type"
+				optionValue="type"
         placeholder="Select Type">
       </p-select>
     </div>
@@ -22,7 +24,6 @@
       <textarea 
         pTextarea 
         id="description" 
-        formControlName="description" 
         rows="3" 
         [autoResize]="true">
       </textarea>
