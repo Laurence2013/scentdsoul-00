@@ -3,25 +3,16 @@
     
     <div class="col-span-1 md:col-span-2 flex flex-col gap-2">
       <label for="brand" class="font-semibold text-slate-700">Brand Name</label>
-      <input 
-        pInputText 
-        id="brand" 
-        formControlName="brand" 
-        placeholder="e.g. Little Trees" 
-        class="w-full"
-      />
+      <input pInputText id="brand" formControlName="brand" placeholder="e.g. Little Trees" class="w-full"/>
     </div>
 
     <div class="flex flex-col gap-2">
       <label for="scent" class="font-semibold text-slate-700">Scent Name</label>
-      <input 
-        pInputText 
-        id="scent" 
-        formControlName="scent" 
-        placeholder="e.g. Black Ice" 
-        class="w-full"
-      />
+      <input pInputText id="scent" formControlName="scent" placeholder="e.g. Black Ice" class="w-full"/>
       <small class="text-slate-400 italic">Enter the specific fragrance name.</small>
+			<hr>	
+      <label for="scent" class="font-semibold text-slate-700">Price</label>
+			<input pInputText id="price" formControlName="price" placeholder="e.g. £3.99" class="w-full"/>
     </div>
 
     <fieldset class="border border-slate-200 bg-slate-50/50 p-4 rounded-xl shadow-sm">
@@ -70,8 +61,7 @@
 
     <div class="col-span-1 md:col-span-2 flex flex-col gap-2">
       <label for="description" class="font-semibold text-slate-700">Description</label>
-      <textarea 
-        pTextarea 
+      <textarea pTextarea 
         id="description" 
         formControlName="description" 
         rows="3" 
@@ -81,19 +71,8 @@
     </div>
 
     <div class="col-span-1 md:col-span-2 flex justify-end gap-3 mt-4">
-      <p-button 
-        label="Cancel" 
-        severity="secondary" 
-        [outlined]="true" 
-        (onClick)="close()">
-      </p-button>
-      <p-button 
-        label="Save Changes" 
-        icon="pi pi-check" 
-        type="submit" 
-        [disabled]="payload02.invalid">
-      </p-button>
+      <p-button label="Cancel" severity="secondary" [outlined]="true" (onClick)="close()"></p-button>
+      <p-button label="Save Changes" icon="pi pi-check" type="submit" [disabled]="payload02.invalid"></p-button>
     </div>
-
   </p-fluid>
 </form>

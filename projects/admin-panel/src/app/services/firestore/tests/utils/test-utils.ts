@@ -27,7 +27,7 @@ export function createMockStorePrice(overrides: Partial<StorePrice> = {}): Store
 	return Object.keys(overrides).length > 0 ? {...defaultStorePrice, ...overrides} : defaultStorePrice;
 };
 export function createMockScents(overrides: Partial<Scent>[] = []): Scent[]{
-	const defaultScent: Scent = {
+	/*const defaultScent: Scent = {
 		scentId: crypto.randomUUID(),
 		name: 'Some scent',
 		description: 'Some description',
@@ -35,5 +35,6 @@ export function createMockScents(overrides: Partial<Scent>[] = []): Scent[]{
 		price: createMockStorePrice(),
 		...overrides
 	};
-	return overrides.length > 0 ? overrides.map(obj => ({...defaultScent, ...obj} as Scent)) : [defaultScent]
+	return overrides.length > 0 ? overrides.map(obj => ({...defaultScent, ...obj} as Scent)) : [defaultScent]*/
+	return [];
 };

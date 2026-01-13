@@ -15,6 +15,7 @@ import { DataService } from '../../services/firestore/data-service';
 import { environment } from '../../../environments/environment';
 import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
+import { Prices } from '../../../models/prices.model';
 import { AddFreshenerFormComponent } from '../add-freshener-form/add-freshener-form.component';
 import { EditFreshenerFormComponent } from '../edit-freshener-form/edit-freshener-form.component';
 
@@ -75,7 +76,8 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 							name: payload01.scent_name,
 							description: payload01.scent_description,
 							scent_type: payload01.scent,
-							scent_sub_type: payload01.subScent
+							scent_sub_type: payload01.subScent,
+							price: payload01.price
 						})]
 					})
 				}),

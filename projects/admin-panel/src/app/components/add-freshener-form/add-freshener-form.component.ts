@@ -46,7 +46,8 @@ export class AddFreshenerFormComponent implements OnInit {
       scent_name: ['', Validators.required],
       scent_description: ['', Validators.required],
       scent_type: ['', Validators.required],
-      sub_scent: ['', Validators.required]
+      sub_scent: ['', Validators.required],
+			price: ['', Validators.required]
     });
   }
 	public getScents(source$: Observable<any[]>){
@@ -69,7 +70,8 @@ export class AddFreshenerFormComponent implements OnInit {
 			scent_name: this.freshenerForm.value.scent_name ?? '',
 			scent_description: this.freshenerForm.value.scent_description ?? '',
 			scent: this.freshenerForm.value.scent_type ?? '',
-			subScent: this.freshenerForm.value.sub_scent ?? ''
+			subScent: this.freshenerForm.value.sub_scent ?? '',
+			price: this.freshenerForm.value.price ?? ''
     };
 		console.log('add-freshener-form -> save(): ', payload);
 

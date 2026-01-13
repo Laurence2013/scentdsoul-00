@@ -17,5 +17,6 @@ export interface Scent {
 	description: string;
 	scent_type: ScentTypes;
 	scent_sub_type?: SubScentTypes;
-	price?: StorePrice;
+	price: number;
+	price_details?: StorePrice;
 }

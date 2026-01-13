@@ -49,7 +49,8 @@ export class EditFreshenerFormComponent implements OnInit {
 			scent: new FormControl(payload01?.by_scent[0].name || '', [Validators.required]),
 			type_of_scent: new FormControl(payload01?.by_scent[0]?.scent_type || '', [Validators.required]),
 			scent_sub_type: new FormControl(payload01?.by_scent[0]?.scent_sub_type || '', [Validators.required]),
-			description: new FormControl(payload01?.by_scent[0]?.description || '', [Validators.required])
+			description: new FormControl(payload01?.by_scent[0]?.description || '', [Validators.required]),
+			price: new FormControl(payload01?.by_scent[0]?.price || 0.00, [Validators.required])
 		});
 		console.log('edit-freshener-form -> getCarAirFresheners(): ', payload01);
 	}

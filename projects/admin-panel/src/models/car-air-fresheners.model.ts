@@ -23,9 +23,9 @@ export class Brands implements Brand {
 				name: s.name,
 				description: s.description,
 				scent_type: s.scent_type,
-				scent_sub_type: s.scent_sub_type || 'Hanging'
+				scent_sub_type: s.scent_sub_type || 'Hanging',
+				price: s.price
 			})),
-			price: ''
 		}
 	}
 }
@@ -36,7 +36,8 @@ export class Scents implements Scent {
 	public description = '';
 	public scent_type: ScentTypes = 'Cardboard';
 	public scent_sub_type?: SubScentTypes = 'Hanging';
-	public price?: StorePrice = new Prices();
+	public price = 0.00;
+	public price_details?: StorePrice = new Prices();
 
 	public constructor(data?: Partial<Scent>){
 		if(data){Object.assign(this, data)}
