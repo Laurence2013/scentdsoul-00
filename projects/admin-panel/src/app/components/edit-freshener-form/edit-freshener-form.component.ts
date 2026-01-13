@@ -29,7 +29,7 @@ export class EditFreshenerFormComponent implements OnInit {
 	private config = inject(DynamicDialogConfig);
 	private dataService = inject(DataService);
 
-	public payload02!: FormGroup;
+	public editForm!: FormGroup;
 	public option00$: Observable<any> = EMPTY;
 	public option01$: Observable<any> = EMPTY;
 
@@ -44,7 +44,7 @@ export class EditFreshenerFormComponent implements OnInit {
 		payload00 ? this.getCarAirFresheners(payload00) : console.log('Not received payload data');
 	}
 	public getCarAirFresheners(payload01: any){
-		this.payload02 = new FormGroup({
+		this.editForm = new FormGroup({
 			brand: new FormControl(payload01?.brand || '', [Validators.required]),
 			scent: new FormControl(payload01?.by_scent[0].name || '', [Validators.required]),
 			type_of_scent: new FormControl(payload01?.by_scent[0]?.scent_type || '', [Validators.required]),
@@ -60,8 +60,19 @@ export class EditFreshenerFormComponent implements OnInit {
 	public getSubScents(source$: Observable<any[]>){
 		this.option01$ = source$.pipe(map((payload00: any[]) => payload00.filter(item00 => item00.type && item00.category)))
 	}
-	public editForm(){}
-	public save(){}
+	public save(){
+		const payload = {
+			brand: this.editForm.value.brand ?? '',
+			name: this.editForm.value.scent ?? '',
+			scent_description: this.editForm.value.description ?? '',
+			scent: this.editForm.value.type_of_scent ?? '',
+			subScent: this.editForm.value.scent_sub_type ?? '',
+			price: this.editForm.value.price ?? ''
+    };
+		console.log('add-freshener-form -> save(): ', payload);
+
+		//this.ref.close(payload);
+	}
 	public close(){
 		this.ref.close();
 	}

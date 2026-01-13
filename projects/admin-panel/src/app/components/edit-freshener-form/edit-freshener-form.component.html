@@ -1,4 +1,4 @@
-<form [formGroup]="payload02" (ngSubmit)="save()" *ngIf="payload02" class="p-4">
+<form [formGroup]="editForm" *ngIf="editForm" class="p-4">
   <p-fluid class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
     
     <div class="col-span-1 md:col-span-2 flex flex-col gap-2">
@@ -72,7 +72,7 @@
 
     <div class="col-span-1 md:col-span-2 flex justify-end gap-3 mt-4">
       <p-button label="Cancel" severity="secondary" [outlined]="true" (onClick)="close()"></p-button>
-      <p-button label="Save Changes" icon="pi pi-check" type="submit" [disabled]="payload02.invalid"></p-button>
+      <p-button label="Save Changes" icon="pi pi-check" type="submit" (onClick)="save()" [disabled]="editForm.invalid"></p-button>
     </div>
   </p-fluid>
 </form>
