@@ -1,4 +1,4 @@
-<form [formGroup]="payload02" (ngSubmit)="save()" class="p-4">
+<form [formGroup]="payload02" class="p-4">
   <p-fluid class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="col-span-1 md:col-span-2 flex flex-col gap-2">
       <label for="brand" class="font-semibold text-slate-700">Brand Name</label>
@@ -17,6 +17,9 @@
 				optionLabel="type"
 				optionValue="type"
         placeholder="Select Type">
+
+				<ng-template pTemplate="item" let-item>{{ item.type | titlecase }}</ng-template>
+				<ng-template pTemplate="selectedItem" let-selectedOption>{{ selectedOption.type | titlecase }}</ng-template>
       </p-select>
     </div>
     <div class="col-span-1 md:col-span-2 flex flex-col gap-2">
@@ -24,6 +27,7 @@
       <textarea 
         pTextarea 
         id="description" 
+				formControlName="description" 
         rows="3" 
         [autoResize]="true">
       </textarea>

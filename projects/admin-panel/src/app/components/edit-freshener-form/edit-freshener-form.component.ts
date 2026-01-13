@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
@@ -14,12 +14,14 @@ import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 import { DataService } from '../../services/firestore/data-service';
 
 import { Observable, EMPTY } from 'rxjs';
+import { map, filter, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-freshener-form',
   templateUrl: './edit-freshener-form.component.html',
   styleUrls: ['./edit-freshener-form.component.scss'],
-	imports: [CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule, CardModule, SelectModule, TextareaModule, FluidModule]
+	imports: [CommonModule, TitleCasePipe, ReactiveFormsModule, ButtonModule, InputTextModule, 
+		CardModule, SelectModule, TextareaModule, FluidModule]
 })
 export class EditFreshenerFormComponent implements OnInit {
 
@@ -29,11 +31,15 @@ export class EditFreshenerFormComponent implements OnInit {
 
 	public payload02!: FormGroup;
 	public option00$: Observable<any> = EMPTY;
+	public option01$: Observable<any> = EMPTY;
 
   public constructor(){}
   public ngOnInit(){
 		const payload00 = this.config.data?.payload;
-		this.option00$ = this.dataService.getScentTypes00$();
+		const rawScent = this.dataService.getScentTypes00$().pipe(shareReplay(1));
+
+		this.getScents(rawScent);
+		this.getSubScents(rawScent);
 
 		payload00 ? this.getCarAirFresheners(payload00) : console.log('Not received payload data');
 	}
@@ -41,12 +47,16 @@ export class EditFreshenerFormComponent implements OnInit {
 		this.payload02 = new FormGroup({
 			brand: new FormControl(payload01?.brand || '', [Validators.required]),
 			scent: new FormControl(payload01?.by_scent[0].name || '', [Validators.required]),
-			type_of_scent: new FormControl(payload01?.by_scent[0]?.scent_type || '', [Validators.required])
+			type_of_scent: new FormControl(payload01?.by_scent[0]?.scent_type || '', [Validators.required]),
+			description: new FormControl(payload01?.by_scent[0]?.description || '', [Validators.required])
 		});
 		console.log('edit-freshener-form -> getCarAirFresheners(): ', payload01);
 	}
-	public getScentTypes(){
-		//this.option00$ = this.dataService.getScentTypes00$();
+	public getScents(source$: Observable<any[]>){
+		this.option00$ = source$.pipe(map((payload00: any[]) => payload00.filter(item00 => item00.type && !item00.category)))
+	}
+	public getSubScents(source$: Observable<any[]>){
+		this.option01$ = source$.pipe(map((payload00: any[]) => payload00.filter(item00 => item00.type && item00.category)))
 	}
 	public editForm(){}
 	public save(){}
