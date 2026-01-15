@@ -46,7 +46,7 @@ export class EditFreshenerFormComponent implements OnInit {
 	public getCarAirFresheners(payload01: any){
 		this.editForm = new FormGroup({
 			brand: new FormControl(payload01?.brand || '', [Validators.required]),
-			scent: new FormControl(payload01?.by_scent[0].name || '', [Validators.required]),
+			name: new FormControl(payload01?.by_scent[0].name || '', [Validators.required]),
 			type_of_scent: new FormControl(payload01?.by_scent[0]?.scent_type || '', [Validators.required]),
 			scent_sub_type: new FormControl(payload01?.by_scent[0]?.scent_sub_type || '', [Validators.required]),
 			description: new FormControl(payload01?.by_scent[0]?.description || '', [Validators.required]),
@@ -62,8 +62,9 @@ export class EditFreshenerFormComponent implements OnInit {
 	}
 	public save(){
 		const payload = {
+			document_id: this.config.data?.payload.id,
 			brand: this.editForm.value.brand ?? '',
-			name: this.editForm.value.scent ?? '',
+			name: this.editForm.value.name ?? '',
 			scent_description: this.editForm.value.description ?? '',
 			scent: this.editForm.value.type_of_scent ?? '',
 			subScent: this.editForm.value.scent_sub_type ?? '',

@@ -6,6 +6,7 @@ export type ScentTypes = 'Cardboard' | 'Vent Clip' | 'Spray' | 'Plug-in' | 'Bag'
 export type SubScentTypes = 'Not Needed' | 'Hanging' | 'Stick' |'Electric Diffuser' | 'Pouch';
 
 export interface Brand {
+	documentId?: string;
 	brandId: string;
 	brand: string;
 	by_scent: Scent[];

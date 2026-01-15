@@ -6,6 +6,7 @@ import { Prices } from './prices.model';
 
 export class Brands implements Brand {
 
+	public documentId = '';
 	public brandId = crypto.randomUUID();
 	public brand = '';
 	public by_scent: Scent[] = [new Scents()];

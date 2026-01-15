@@ -103,10 +103,29 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 		if(this.ref00){
 			this.ref00.onClose.pipe(
 				filter(payload => !!payload),
-				tap(payload00 => console.log('dashboard -> editItem(): ', payload00)),
-			).subscribe();
+				tap(payload00 => console.log('1. dashboard -> editItem(): ', payload00)),
+				map(payload01 => {
+					return new Brands({
+						documentId: payload01.document_id,
+						brand: payload01.brand,
+						by_scent: [new Scents({
+							name: payload01.name,
+							description: payload01.scent_description,
+							scent_type: payload01.scent,
+							scent_sub_type: payload01.subScent,
+							price: payload01.price
+						})]
+					})
+				}),
+				tap(payload00 => console.log('2. dashboard -> editItem(): ', payload00)),
+				switchMap((payload03: Brands) => this.dataService.updateCarAirFreshener00$(payload03)),
+				takeUntilDestroyed(this.destrofRef)
+			).subscribe(doc => {
+				console.log('Has been updated: ', doc);
+				this.car_air_fresheners();
+			});
 		}else{
-			console.log('Not working at editItem()');
+			console.log('Not working at app.component.ts');
 		}
 	}
 	public deleteItem(name: string){

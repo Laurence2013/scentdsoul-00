@@ -1,5 +1,5 @@
 import { Injectable, inject, Injector, runInInjectionContext } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, Timestamp } from '@angular/fire/firestore';
+import { Firestore, collection, doc, collectionData, addDoc, updateDoc, Timestamp } from '@angular/fire/firestore';
 
 import { Observable, EMPTY, from, of } from 'rxjs';
 import { map, filter, switchMap } from 'rxjs/operators';
@@ -35,6 +35,15 @@ export class DataService {
 			const plainData = payload00.toPlainObj()
 
 			return from(addDoc(cafCollection00, plainData)).pipe(map((docRef) => { return {idDoc: docRef.id}}))
+		});
+	}
+	public updateCarAirFreshener00$(payload00: any): Observable<any>{
+		console.log(payload00);
+		return runInInjectionContext(this.injector, () => {
+			const docRef = doc(this.firestore, `brands/${payload00.documentId}`);
+			const data01 = payload00 instanceof Brands ? payload00.toPlainObj() : payload00;
+
+			return from(updateDoc(docRef, data01));
 		});
 	}
 }
