@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { SelectModule } from 'primeng/select';
+import { FileUpload } from 'primeng/fileupload';
 
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 import { DataService } from '../../services/firestore/data-service';
@@ -21,7 +22,8 @@ import { map, filter, shareReplay } from 'rxjs/operators';
   templateUrl: './add-freshener-form.component.html',
   styleUrls: ['./add-freshener-form.component.scss'],
   standalone: true,
-	imports: [CommonModule, ButtonModule, InputTextModule, CardModule, SelectModule, FormsModule, ReactiveFormsModule]
+	imports: [CommonModule, ButtonModule, InputTextModule, CardModule, SelectModule, 
+		FormsModule, ReactiveFormsModule, FileUpload]
 })
 export class AddFreshenerFormComponent implements OnInit {
 
@@ -32,6 +34,8 @@ export class AddFreshenerFormComponent implements OnInit {
 	public option00$: Observable<any> = EMPTY;
 	public option01$: Observable<any> = EMPTY;
 	public freshenerForm!: FormGroup;
+	public previewUrl: string | null = null;
+	public selectedFile: File | null = null;
 
   public ngOnInit(){
 		const rawScent$ = this.dataService.getScentTypes00$().pipe(shareReplay(1));
@@ -63,6 +67,16 @@ export class AddFreshenerFormComponent implements OnInit {
 				.filter(item00 => item00.type && item00.category)
 				.map(item01 => ({type: item01.type.charAt(0).toUpperCase() + item01.type.slice(1)}))
 		))
+	}
+	public onFileSelected(event: any){
+		const file = event.files[0];
+		if(file){
+			this.selectedFile = file;
+
+			const reader = new FileReader();
+			reader.onload = () => this.previewUrl = reader.result as string;
+			reader.readAsDataURL(file);
+		}
 	}
 	public save(){
 		const payload = {

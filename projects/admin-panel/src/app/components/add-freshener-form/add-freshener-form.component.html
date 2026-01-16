@@ -42,6 +42,26 @@
         </p-select>
       </p-card>
     </div>
+		<hr>
+		<div class="flex flex-col gap-2">
+		<label class="font-bold text-sm">Product Image: <span class="text-red-500">*</span></label>
+		<p-fileUpload
+			mode="basic"
+			chooseLabel="Choose Image"
+			chooseIcon="pi pi-upload"
+			name="demo[]"
+			accept="image/*"
+			maxFileSize="1000000"
+			(onSelect)="onFileSelected($event)"
+			styleClass="w-full">
+		</p-fileUpload>
+
+		@if (previewUrl) {
+			<div class="mt-2 text-center">
+				<img [src]="previewUrl" class="w-full max-h-40 object-contain rounded border border-gray-200">
+			</div>
+		}
+		</div>
   </section>
 
   <div class="flex justify-end gap-2">

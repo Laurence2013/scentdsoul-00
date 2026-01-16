@@ -12,6 +12,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { DataService } from '../../services/firestore/data-service';
+import { StorageService } from '../../services/firestore/storage-service';
 import { environment } from '../../../environments/environment';
 import { Brand, Scent } from '../../../interfaces/car-air-fresheners.interface';
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
@@ -20,7 +21,7 @@ import { AddFreshenerFormComponent } from '../add-freshener-form/add-freshener-f
 import { EditFreshenerFormComponent } from '../edit-freshener-form/edit-freshener-form.component';
 
 import { Observable, of, EMPTY } from 'rxjs';
-import { tap, map, filter, delay, switchMap, shareReplay } from 'rxjs/operators';
+import { tap, map, filter, switchMap, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -54,7 +55,6 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 	public car_air_fresheners(){
 		this.caf00$ = this.dataService.getCarAirFresheners00$().pipe(
 			tap(brand00 => console.log('dashboard => car_air_fresheners(): ', brand00)),
-			delay(1000),
 			shareReplay(1)
 		);
 	}
