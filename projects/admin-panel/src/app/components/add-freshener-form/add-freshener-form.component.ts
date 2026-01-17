@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { Timestamp } from '@angular/fire/firestore';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogRef, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
@@ -24,7 +24,7 @@ import { map, filter, shareReplay } from 'rxjs/operators';
   styleUrls: ['./add-freshener-form.component.scss'],
   standalone: true,
 	imports: [CommonModule, ButtonModule, InputTextModule, CardModule, SelectModule, 
-		FormsModule, ReactiveFormsModule, FileUpload]
+		FormsModule, ReactiveFormsModule, FileUpload, DynamicDialogModule]
 })
 export class AddFreshenerFormComponent implements OnInit {
 

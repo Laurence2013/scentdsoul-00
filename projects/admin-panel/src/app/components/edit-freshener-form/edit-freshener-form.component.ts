@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogRef, DynamicDialogConfig, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
@@ -21,7 +21,7 @@ import { map, filter, shareReplay } from 'rxjs/operators';
   templateUrl: './edit-freshener-form.component.html',
   styleUrls: ['./edit-freshener-form.component.scss'],
 	imports: [CommonModule, TitleCasePipe, ReactiveFormsModule, ButtonModule, InputTextModule, 
-		CardModule, SelectModule, TextareaModule, FluidModule]
+		CardModule, SelectModule, TextareaModule, FluidModule, DynamicDialogModule]
 })
 export class EditFreshenerFormComponent implements OnInit {
 

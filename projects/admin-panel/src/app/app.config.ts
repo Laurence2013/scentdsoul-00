@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FirebaseApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore, connectFirestoreEmulator, initializeFirestore } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
@@ -28,6 +29,7 @@ export const appConfig: ApplicationConfig = {
 			}
 			return firestore;
 		}),
+		provideStorage(() => getStorage()),
 		providePrimeNG({ 
 			theme: { 
 				preset: Aura,

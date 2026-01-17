@@ -9,7 +9,7 @@ import { FluidModule } from 'primeng/fluid';
 import { Avatar } from 'primeng/avatar';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef, DynamicDialogModule } from 'primeng/dynamicdialog';
 
 import { DataService } from '../../services/firestore/data-service';
 import { StorageService } from '../../services/firestore/storage-service';
@@ -28,7 +28,7 @@ import { tap, map, filter, switchMap, shareReplay } from 'rxjs/operators';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 	providers: [DialogService],
-	imports: [CommonModule, Avatar, Card, ButtonModule, FluidModule, ProgressSpinner, TooltipModule]
+	imports: [CommonModule, Avatar, Card, ButtonModule, FluidModule, ProgressSpinner, TooltipModule, DynamicDialogModule]
 })
 export class DashboardComponent  implements OnInit, OnDestroy {
 
