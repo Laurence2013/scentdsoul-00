@@ -39,12 +39,8 @@
     "firebase": "11.10.0",
     "immutable": "^5.1.4",
     "ionicons": "^8.0.13",
-<<<<<<< Updated upstream
     "postman-cli": "^1.29.0",
     "primeng": "^21.0.3",
-=======
-    "primeng": "^21.0.2",
->>>>>>> Stashed changes
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.16.0"
