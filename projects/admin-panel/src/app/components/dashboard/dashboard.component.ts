@@ -66,28 +66,25 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 			breakpoints: {'960px': '75vw','640px': '90vw'}
 		});
 		if(this.ref){
-			this.ref.onClose.pipe(
-				filter(payload => !!payload),
-				tap(payload00 => console.log('dashboard -> addNewItem(): ', payload00)),
-				map(payload01 => {
-					return new Brands({
-						brand: payload01.brand,
-						by_scent: [new Scents({
-							name: payload01.scent_name,
-							description: payload01.scent_description,
-							scent_type: payload01.scent,
-							scent_sub_type: payload01.subScent,
-							price: payload01.price
-						})]
-					})
-				}),
-				tap((payload02: Brands) => console.log(payload02 instanceof Brands)),
-				switchMap((payload03: Brands) => this.dataService.addNewCarAirFreshener00$(payload03)),
-				takeUntilDestroyed(this.destrofRef)
-			).subscribe(doc => {
-				console.log('Has been saved!: ', doc.idDoc);
-				this.car_air_fresheners();
-			});
+			const mapFn = (payload01: any) => {
+				return new Brands({
+					brand: payload01.brand,
+					by_scent: [new Scents({
+						name: payload01.scent_name,
+						description: payload01.scent_description,
+						scent_type: payload01.scent,
+						scent_sub_type: payload01.subScent,
+						price: payload01.price
+					})]
+				})
+			};
+			const dataServiceFn = (payload03: Brands) => this.dataService.addNewCarAirFreshener00$(payload03);
+
+			this.item_updates(this.ref.onClose, mapFn, dataServiceFn)
+				.subscribe(doc => {
+					console.log('Has been saved!: ', doc.idDoc);
+					this.car_air_fresheners();
+				});
 		}else{
 			console.log('Not working at app.component.ts');
 		}
@@ -101,32 +98,43 @@ export class DashboardComponent  implements OnInit, OnDestroy {
 			data: {payload: item}
 		});
 		if(this.ref00){
-			this.ref00.onClose.pipe(
-				filter(payload => !!payload),
-				tap(payload00 => console.log('1. dashboard -> editItem(): ', payload00)),
-				map(payload01 => {
-					return new Brands({
-						documentId: payload01.document_id,
-						brand: payload01.brand,
-						by_scent: [new Scents({
-							name: payload01.name,
-							description: payload01.scent_description,
-							scent_type: payload01.scent,
-							scent_sub_type: payload01.subScent,
-							price: payload01.price
-						})]
-					})
-				}),
-				tap(payload00 => console.log('2. dashboard -> editItem(): ', payload00)),
-				switchMap((payload03: Brands) => this.dataService.updateCarAirFreshener00$(payload03)),
-				takeUntilDestroyed(this.destrofRef)
-			).subscribe(doc => {
-				console.log('Has been updated: ', doc);
-				this.car_air_fresheners();
-			});
+			const mapFn = (payload01: any) => {
+				return new Brands({
+					documentId: payload01.document_id,
+					brand: payload01.brand,
+					by_scent: [new Scents({
+						name: payload01.name,
+						description: payload01.scent_description,
+						scent_type: payload01.scent,
+						scent_sub_type: payload01.subScent,
+						price: payload01.price
+					})]
+				})
+			};
+			const dataServiceFn = (payload03: Brands) => this.dataService.updateCarAirFreshener00$(payload03);
+
+			this.item_updates(this.ref00.onClose, mapFn, dataServiceFn)
+				.subscribe(doc => {
+					console.log('Has been updated: ', doc);
+					this.car_air_fresheners();
+				});
 		}else{
 			console.log('Not working at app.component.ts');
 		}
+	}
+	private item_updates(
+		onClose$: Observable<any>,
+		mapFn: (payload: any) => Brands,
+		dataServiceFn: (payload: Brands) => Observable<any>
+	): Observable<any> {
+		return onClose$.pipe(
+			filter(payload => !!payload),
+			tap(payload00 => console.log('dashboard -> item_updates(): ', payload00)),
+			map(mapFn),
+			tap((payload02: Brands) => console.log(payload02 instanceof Brands)),
+			switchMap(dataServiceFn),
+			takeUntilDestroyed(this.destrofRef)
+		);
 	}
 	public deleteItem(name: string){
 		console.log('Deleting item with ID:', name);
