@@ -10,6 +10,7 @@ export class Brands implements Brand {
 	public brandId = crypto.randomUUID();
 	public brand = '';
 	public by_scent: Scent[] = [new Scents()];
+	public image_name = '';
 	public createdAt = Timestamp.now();
 
 	public constructor(data?: Partial<Brand>){

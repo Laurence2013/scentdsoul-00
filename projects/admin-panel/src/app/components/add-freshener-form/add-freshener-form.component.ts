@@ -13,6 +13,7 @@ import { FileUpload } from 'primeng/fileupload';
 
 import { Brands, Scents } from '../../../models/car-air-fresheners.model';
 import { DataService } from '../../services/firestore/data-service';
+import { StorageService } from '../../services/firestore/storage-service';
 
 import { Observable, EMPTY } from 'rxjs';
 import { map, filter, shareReplay } from 'rxjs/operators';
@@ -29,6 +30,7 @@ export class AddFreshenerFormComponent implements OnInit {
 
 	private ref = inject(DynamicDialogRef);
 	private dataService = inject(DataService);
+	private storageService = inject(StorageService);
 	private fb = inject(FormBuilder);
 
 	public option00$: Observable<any> = EMPTY;

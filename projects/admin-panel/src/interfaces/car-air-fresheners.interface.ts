@@ -10,6 +10,7 @@ export interface Brand {
 	brandId: string;
 	brand: string;
 	by_scent: Scent[];
+	image_name: string;
 	createdAt: Timestamp;
 }
 export interface Scent {
